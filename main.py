@@ -167,5 +167,21 @@ for title in tabButtons:
 		title.click()
 		break
 
+time.sleep(1)
+
+driver.find_element(By.NAME, 'login').click()
+
+time.sleep(1)
+
+driver.find_element(By.NAME, 'username').click()
+driver.find_element(By.NAME, 'username').send_keys("literally an AI")
+
+loginButtons = driver.find_elements(By.CLASS_NAME, 'button')
+
+for title in loginButtons: 
+	# select H2s, within element, by tag name 
+	print(title.text)
+	
+loginButtons[-2].click()
 
 time.sleep(10)
