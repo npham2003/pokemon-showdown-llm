@@ -1,7 +1,7 @@
 import os
 import requests
 from bs4 import BeautifulSoup
-
+from urllib.parse import unquote
 def save_webpage_html(url, file_path):
     """
     Fetches the HTML content of a website and writes it to a file.
@@ -49,7 +49,7 @@ def save_all_pokemon_html(base_url, folder_name='gen8_html'):
         return
 
     for link in pokemon_links:
-        pokemon_name = link.split('/')[-1].split('?')[0].strip().lower()  # Trim whitespace and convert to lowercase
+        pokemon_name = unquote(link.split('/')[-1].split('?')[0]).strip().lower() # Trim whitespace and convert to lowercase
         file_path = os.path.join(folder_name, f"{pokemon_name}.html")
         full_url = f"{base_url}/{pokemon_name}"  # Construct the full URL
         save_webpage_html(full_url, file_path)
