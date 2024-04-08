@@ -59,7 +59,7 @@ def extract_pokemon_data(html_file):
     }
 
 # Example usage
-folder_name = 'pokemon_html'  # Use your actual folder name where HTML files are stored
+folder_name = 'gen8_html'  # Use your actual folder name where HTML files are stored
 data = []
 for html_file in os.listdir(folder_name):
     if html_file.endswith('.html'):
@@ -67,7 +67,7 @@ for html_file in os.listdir(folder_name):
         data.append(pokemon_data)
 
 # Save data to a file
-output_file = 'meta.txt'
+output_file = 'metagen8.txt'
 with open(output_file, 'w', encoding='utf-8') as outfile:
     for pokemon in data:
         json.dump(pokemon, outfile, ensure_ascii=False)

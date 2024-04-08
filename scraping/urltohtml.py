@@ -28,13 +28,13 @@ def get_pokemon_links(base_url):
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         link_elements = soup.find_all('a', href=True)
-        pokemon_links = [link['href'] for link in link_elements if 'pokedex/rby/' in link['href'] and not link['href'].startswith('http')]
+        pokemon_links = [link['href'] for link in link_elements if 'pokedex/gen8ou/' in link['href'] and not link['href'].startswith('http')]
         return pokemon_links
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
         return []
 
-def save_all_pokemon_html(base_url, folder_name='pokemon_html'):
+def save_all_pokemon_html(base_url, folder_name='gen8_html'):
     """
     Saves the HTML page for each Pokémon by finding their links and calling save_webpage_html.
     :param base_url: The base URL of the main Pokémon list page.
@@ -55,5 +55,5 @@ def save_all_pokemon_html(base_url, folder_name='pokemon_html'):
         save_webpage_html(full_url, file_path)
 
 # Usage example
-base_url = "https://www.pikalytics.com/pokedex/rby"
+base_url = "https://www.pikalytics.com/pokedex/gen8ou"
 save_all_pokemon_html(base_url)
