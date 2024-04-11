@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8randombattle-12</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8randombattle-12<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">literally an ai</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">AqoursBaelz</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8randombattle-12|init|battle
+|title|AqoursBaelz vs. literally an ai
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|gametype|singles
+|player|p1|AqoursBaelz|170|1000
+|player|p2|literally an ai|1|1045
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] Random Battle
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Illusion Level Mod: Illusion disguises the Pokémon's true level
+|start
+|switch|p1a: Eternatus|Eternatus, L69|100/100
+|switch|p2a: Conkeldurr|Conkeldurr, L79, M|295/295
+|-ability|p1a: Eternatus|Pressure
+|turn|1
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Conkeldurr
+|-damage|p2a: Conkeldurr|168/295
+|move|p2a: Conkeldurr|Close Combat|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|75/100
+|-unboost|p2a: Conkeldurr|def|1
+|-unboost|p2a: Conkeldurr|spd|1
+|-status|p2a: Conkeldurr|brn|[from] item: Flame Orb
+|upkeep
+|turn|2
+|move|p1a: Eternatus|Sludge Wave|p2a: Conkeldurr
+|-damage|p2a: Conkeldurr|0 fnt
+|faint|p2a: Conkeldurr
+|upkeep
+|switch|p2a: Barraskewda|Barraskewda, L80, M|229/229
+|turn|3
+|move|p2a: Barraskewda|Psychic Fangs|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|upkeep
+|switch|p1a: Thundurus|Thundurus, L81, M|100/100
+|turn|4
+|move|p1a: Thundurus|Nasty Plot|p1a: Thundurus
+|-boost|p1a: Thundurus|spa|2
+|move|p2a: Barraskewda|Psychic Fangs|p1a: Thundurus
+|-damage|p1a: Thundurus|51/100
+|upkeep
+|turn|5
+|move|p2a: Barraskewda|Psychic Fangs|p1a: Thundurus
+|-damage|p1a: Thundurus|1/100
+|move|p1a: Thundurus|Thunderbolt|p2a: Barraskewda
+|-supereffective|p2a: Barraskewda
+|-damage|p2a: Barraskewda|0 fnt
+|faint|p2a: Barraskewda
+|upkeep
+|switch|p2a: Octillery|Octillery, L90, F|281/281
+|turn|6
+|move|p1a: Thundurus|Thunderbolt|p2a: Octillery
+|-supereffective|p2a: Octillery
+|-damage|p2a: Octillery|0 fnt
+|faint|p2a: Octillery
+|upkeep
+|switch|p2a: Porygon-Z|Porygon-Z, L80|267/267
+|turn|7
+|move|p2a: Porygon-Z|Ice Beam|p1a: Thundurus
+|-supereffective|p1a: Thundurus
+|-damage|p1a: Thundurus|0 fnt
+|faint|p1a: Thundurus
+|upkeep
+|switch|p1a: Starmie|Starmie, L84|100/100
+|turn|8
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|84/100
+|move|p1a: Starmie|Hydro Pump|p2a: Porygon-Z|[miss]
+|-miss|p1a: Starmie|p2a: Porygon-Z
+|upkeep
+|turn|9
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|68/100
+|-status|p1a: Starmie|frz
+|cant|p1a: Starmie|frz
+|upkeep
+|turn|10
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|52/100 frz
+|cant|p1a: Starmie|frz
+|upkeep
+|turn|11
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|35/100 frz
+|cant|p1a: Starmie|frz
+|upkeep
+|turn|12
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|19/100 frz
+|cant|p1a: Starmie|frz
+|upkeep
+|turn|13
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|3/100 frz
+|cant|p1a: Starmie|frz
+|upkeep
+|turn|14
+|move|p2a: Porygon-Z|Ice Beam|p1a: Starmie
+|-resisted|p1a: Starmie
+|-damage|p1a: Starmie|0 fnt
+|faint|p1a: Starmie
+|upkeep
+|switch|p1a: Aromatisse|Aromatisse, L89, M|100/100
+|turn|15
+|move|p2a: Porygon-Z|Ice Beam|p1a: Aromatisse
+|-damage|p1a: Aromatisse|76/100
+|move|p1a: Aromatisse|Moonblast|p2a: Porygon-Z
+|-damage|p2a: Porygon-Z|128/267
+|-heal|p1a: Aromatisse|83/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|move|p2a: Porygon-Z|Ice Beam|p1a: Aromatisse
+|-damage|p1a: Aromatisse|61/100
+|move|p1a: Aromatisse|Moonblast|p2a: Porygon-Z
+|-damage|p2a: Porygon-Z|0 fnt
+|faint|p2a: Porygon-Z
+|-heal|p1a: Aromatisse|68/100|[from] item: Leftovers
+|upkeep
+|switch|p2a: Reuniclus|Reuniclus, L84, F|322/322
+|turn|17
+|move|p1a: Aromatisse|Protect|p1a: Aromatisse
+|-singleturn|p1a: Aromatisse|Protect
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-activate|p1a: Aromatisse|move: Protect
+|-heal|p1a: Aromatisse|74/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|move|p1a: Aromatisse|Moonblast|p2a: Reuniclus
+|-damage|p2a: Reuniclus|213/322
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-resisted|p1a: Aromatisse
+|-damage|p1a: Aromatisse|55/100
+|-unboost|p1a: Aromatisse|spd|1
+|-heal|p1a: Aromatisse|61/100|[from] item: Leftovers
+|upkeep
+|turn|19
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-resisted|p1a: Aromatisse
+|-damage|p1a: Aromatisse|31/100
+|-heal|p1a: Aromatisse|37/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|move|p1a: Aromatisse|Protect|p1a: Aromatisse
+|-singleturn|p1a: Aromatisse|Protect
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-activate|p1a: Aromatisse|move: Protect
+|-heal|p1a: Aromatisse|87/100|[from] move: Wish|[wisher] Aromatisse
+|-heal|p1a: Aromatisse|93/100|[from] item: Leftovers
+|upkeep
+|turn|21
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-resisted|p1a: Aromatisse
+|-damage|p1a: Aromatisse|63/100
+|-unboost|p1a: Aromatisse|spd|1
+|-heal|p1a: Aromatisse|69/100|[from] item: Leftovers
+|upkeep
+|turn|22
+|move|p1a: Aromatisse|Moonblast|p2a: Reuniclus
+|-damage|p2a: Reuniclus|95/322
+|-unboost|p2a: Reuniclus|spa|1
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-resisted|p1a: Aromatisse
+|-crit|p1a: Aromatisse
+|-damage|p1a: Aromatisse|9/100
+|-heal|p1a: Aromatisse|59/100|[from] move: Wish|[wisher] Aromatisse
+|-heal|p1a: Aromatisse|65/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-resisted|p1a: Aromatisse
+|-damage|p1a: Aromatisse|39/100
+|-heal|p1a: Aromatisse|45/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|move|p1a: Aromatisse|Protect|p1a: Aromatisse
+|-singleturn|p1a: Aromatisse|Protect
+|move|p2a: Reuniclus|Focus Blast|p1a: Aromatisse
+|-activate|p1a: Aromatisse|move: Protect
+|-heal|p1a: Aromatisse|95/100|[from] move: Wish|[wisher] Aromatisse
+|-heal|p1a: Aromatisse|100/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|move|p1a: Aromatisse|Moonblast|p2a: Reuniclus
+|-damage|p2a: Reuniclus|0 fnt
+|faint|p2a: Reuniclus
+|upkeep
+|switch|p2a: Dialga|Dialga, L74|270/270
+|-ability|p2a: Dialga|Pressure
+|turn|26
+|switch|p1a: Incineroar|Incineroar, L80, M|100/100
+|-ability|p1a: Incineroar|Intimidate|boost
+|-unboost|p2a: Dialga|atk|1
+|move|p2a: Dialga|Draco Meteor|p1a: Incineroar
+|-damage|p1a: Incineroar|43/100
+|-unboost|p2a: Dialga|spa|2
+|upkeep
+|turn|27
+|move|p2a: Dialga|Draco Meteor|p1a: Incineroar
+|-damage|p1a: Incineroar|15/100
+|-unboost|p2a: Dialga|spa|2
+|move|p1a: Incineroar|Parting Shot|p2a: Dialga
+|-unboost|p2a: Dialga|atk|1
+|-unboost|p2a: Dialga|spa|1
+|switch|p1a: Aromatisse|Aromatisse, L89, M|100/100|[from] Parting Shot
+|upkeep
+|turn|28
+|move|p2a: Dialga|Draco Meteor|p1a: Aromatisse
+|-immune|p1a: Aromatisse
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|upkeep
+|turn|29
+|move|p2a: Dialga|Draco Meteor|p1a: Aromatisse
+|-immune|p1a: Aromatisse
+|move|p1a: Aromatisse|Moonblast|p2a: Dialga
+|-damage|p2a: Dialga|152/270
+|-heal|p2a: Dialga|168/270|[from] item: Leftovers
+|upkeep
+|turn|30
+|move|p2a: Dialga|Draco Meteor|p1a: Aromatisse
+|-immune|p1a: Aromatisse
+|move|p1a: Aromatisse|Moonblast|p2a: Dialga
+|-damage|p2a: Dialga|42/270
+|-heal|p2a: Dialga|58/270|[from] item: Leftovers
+|upkeep
+|turn|31
+|move|p2a: Dialga|Draco Meteor|p1a: Aromatisse
+|-immune|p1a: Aromatisse
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|-heal|p2a: Dialga|74/270|[from] item: Leftovers
+|upkeep
+|turn|32
+|switch|p1a: Incineroar|Incineroar, L80, M|15/100
+|-ability|p1a: Incineroar|Intimidate|boost
+|-unboost|p2a: Dialga|atk|1
+|move|p2a: Dialga|Draco Meteor|p1a: Incineroar
+|-damage|p1a: Incineroar|0 fnt
+|-unboost|p2a: Dialga|spa|1
+|faint|p1a: Incineroar
+|-heal|p2a: Dialga|90/270|[from] item: Leftovers
+|upkeep
+|switch|p1a: Aromatisse|Aromatisse, L89, M|100/100
+|turn|33
+|move|p2a: Dialga|Draco Meteor|p1a: Aromatisse
+|-immune|p1a: Aromatisse
+|move|p1a: Aromatisse|Wish|p1a: Aromatisse
+|-heal|p2a: Dialga|106/270|[from] item: Leftovers
+|upkeep
+|turn|34
+|move|p2a: Dialga|Flash Cannon|p1a: Aromatisse
+|-supereffective|p1a: Aromatisse
+|-damage|p1a: Aromatisse|85/100
+|-unboost|p1a: Aromatisse|spd|1
+|move|p1a: Aromatisse|Moonblast|p2a: Dialga
+|-damage|p2a: Dialga|0 fnt
+|faint|p2a: Dialga
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
