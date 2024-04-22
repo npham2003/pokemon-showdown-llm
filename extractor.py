@@ -25,7 +25,7 @@ for line in f:
             attack_count+=1
         elif bool(re.search("\|switch\|", line)):
             switch_count+=1
-    if re.search('|-damage|',line) and re.search(player,line):
+    if re.search('\|-damage\|',line) and re.search(player,line):
         if re.search('0 fnt',line):  # Pokemon is dead
             pokemon_cnt -= 1
         if re.search('[\d]{1,3}\/[\d]{1,3}',line):
