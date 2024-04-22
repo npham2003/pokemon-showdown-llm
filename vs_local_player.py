@@ -1,5 +1,6 @@
 import asyncio
 from poke_env import AccountConfiguration, ShowdownServerConfiguration
+from poke_env.data import opponent_meta
 from poke_env.player import LLMPlayer
 import pickle as pkl
 from tqdm import tqdm
@@ -15,9 +16,12 @@ args = parser.parse_args()
 
 async def main():
 
+    opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('azrael001')
+
+
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8ou",
-                           api_key="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",
+                           api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
                            temperature=args.temperature,
                            prompt_algo=args.prompt_algo,
@@ -92,7 +96,7 @@ Jolly Nature
         try:
             await llm_player.ladder(1)
             for battle_id, battle in llm_player.battles.items():
-                with open(f"{args.log_dir}/{battle_id}.pkl", "wb") as f:
+                with open(f"{args.log_dir}/{battle.opponent_username}.pkl", "wb") as f:
                     pkl.dump(battle, f)
         except:
             continue
