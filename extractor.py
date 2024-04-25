@@ -23,10 +23,7 @@ for line in f:
         name_raw = name_raw.replace('|','').strip()
         name = name_raw.split(',')[0].strip()
         name = name.split('-')[0].strip() # Unsure
-        if name == 'Urshifu-*':
-            name = 'Urshifu'
         pokemons[name]=1
-        print(name)
 
     if bool(re.search('\|turn\|', line)):
         turn_count+=1
