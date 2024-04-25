@@ -22,8 +22,10 @@ for line in f:
         name_raw = line[9:]
         name_raw = name_raw.replace('|','').strip()
         name = name_raw.split(',')[0].strip()
-        name = name.split('-')[0].strip() # Unsure
-        pokemons[name]=1
+        base = name.split('-')[0].strip() # Unsure
+        pokemons[name]={'base_form':base,
+                        'HP':1}
+
 
     if bool(re.search('\|turn\|', line)):
         turn_count+=1
@@ -35,19 +37,22 @@ for line in f:
     if re.search('|-damage|',line) and re.search(player,line):
         if re.search('0 fnt',line):  # Pokemon is dead
             pokemon_cnt -= 1
-            for pokemon_name in pokemons.keys():
-                if re.search(pokemon_name,line):
-                    pokemons[pokemon_name]= 0
-                    #print(pokemon_name,'Dead')
+            for pokemon_name,tdic in pokemons.items():
+                base = tdic['base_form']
+                if re.search(pokemon_name,line) or re.search(base,line):
+                    pokemons[pokemon_name]= {'base_form':base,
+                                            'HP': 0}
         if re.search('[\d]{1,3}\/[\d]{1,3}',line):
             damage_cnt +=1
             text=re.findall('[\d]{1,3}\/[\d]{1,3}',line)[0]
             num,dem = text.split('/')
             perc=int(num)/int(dem)
-            for pokemon_name in pokemons.keys():
-                if re.search(pokemon_name,line):
-                    pokemons[pokemon_name]= perc
-                    #print(pokemon_name,perc)
+            for pokemon_name,tdic in pokemons.items():
+                base = tdic['base_form']
+                if re.search(pokemon_name,line) or re.search(base,line):
+                    pokemons[pokemon_name]= {'base_form':base,
+                                            'HP':perc}
+
             
 
 print("Turns: "+ str(turn_count))
@@ -56,5 +61,6 @@ print(str(attack_count/turn_count))
 print("Switched "+str(switch_count)+" times")
 print(str(switch_count/turn_count))
 print(pokemons)
-print('Average Health {:.2f}%'.format(sum(list(pokemons.values())*100)/len(pokemons)))
+avg_hp = sum([tdic['HP'] for tdic in pokemons.values()])/len(pokemons)
+print('Average Health {:.2f}%'.format(avg_hp*100))
 print('Number of Pokemon',pokemon_cnt)
