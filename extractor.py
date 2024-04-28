@@ -3,7 +3,6 @@ import os
 import pandas as pd
 
 
-
 def metric_calculator(f,filename):
     '''
     
@@ -31,7 +30,6 @@ def metric_calculator(f,filename):
             base = name.split('-')[0].strip() # Unsure
             pokemons[name]={'base_form':base,
                             'HP':1}
-
 
         if bool(re.search('\|turn\|', line)):
             turn_count+=1
@@ -80,7 +78,9 @@ for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
 
 df.to_csv('battle_metrics.csv',index=None)
 lost= df['Average HP'].isin([0]).sum(axis=0)
-win_rate =lost /len(df)
+win_rate =1-(lost /len(df))
+
+
 print('-----Metrics--------')
 print('Battles Lost:\t\t',lost)
 print('Battles Won:\t\t',len(df) - lost)
@@ -90,7 +90,4 @@ print('Average Turn Count: \t {:.2f}'.format(df['Turn Count'].mean()))
 print('Average Attack Count: \t {:.2f}'.format(df['Attack Count'].mean()))
 print('Average Switch Count: \t {:.2f}'.format(df['Switch Count'].mean()))
 print('Average HP: \t\t {:.2f}%'.format(df['Average HP'].mean()))
-
-
-
 
