@@ -24,65 +24,7 @@ async def main():
                            log_dir=args.log_dir,
                            account_configuration=AccountConfiguration("literally an ai", "NYUTesting"),
                            save_replays=args.log_dir,
-                           team="""Urshifu-Rapid-Strike @ Choice Band  
-Ability: Unseen Fist  
-EVs: 252 Atk / 4 Def / 252 Spe  
-Jolly Nature  
-- Surging Strikes  
-- Close Combat  
-- Aqua Jet  
-- U-turn  
-
-Heatran @ Air Balloon  
-Ability: Flash Fire  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Magma Storm  
-- Taunt  
-- Earth Power  
-- Stealth Rock  
-
-Rotom-Wash @ Leftovers  
-Ability: Levitate  
-Shiny: Yes  
-EVs: 252 HP / 248 SpD / 8 Spe  
-Calm Nature  
-IVs: 0 Atk  
-- Volt Switch  
-- Hydro Pump  
-- Thunder Wave  
-- Pain Split  
-
-Landorus-Therian (M) @ Leftovers  
-Ability: Intimidate  
-EVs: 248 HP / 8 Def / 252 SpD  
-Careful Nature  
-IVs: 23 Spe  
-- Defog  
-- Earthquake  
-- U-turn  
-- Knock Off  
-
-Tapu Lele @ Choice Scarf  
-Ability: Psychic Surge  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Psyshock  
-- Moonblast  
-- Focus Blast  
-- Future Sight  
-
-Kartana @ Protective Pads  
-Ability: Beast Boost  
-Shiny: Yes  
-EVs: 252 Atk / 4 SpD / 252 Spe  
-Jolly Nature  
-- Swords Dance  
-- Knock Off  
-- Sacred Sword  
-- Leaf Blade"""
+                           team="Urshifu-Rapid-Strike||choiceband|unseenfist|surgingstrikes,closecombat,aquajet,uturn|Jolly|,252,4,,,252|||||]Heatran||airballoon|flashfire|magmastorm,taunt,earthpower,stealthrock|Timid|,,,252,4,252||,0,,,,|||]Rotom-Wash||leftovers|levitate|voltswitch,hydropump,thunderwave,painsplit|Calm|252,,,,248,8||,0,,,,|||]Landorus-Therian||leftovers|intimidate|defog,earthquake,uturn,knockoff|Careful|248,,8,,252,||,,,,,23|||]Tapu Lele||choicescarf|psychicsurge|psyshock,moonblast,focusblast,futuresight|Timid|,,,252,4,252||,0,,,,|||]Kartana||protectivepads|beastboost|swordsdance,knockoff,sacredsword,leafblade|Jolly|,252,,,4,252|||||"
                            )
 
     llm_player._dynamax_disable = True # If you choose to disable Dynamax for PokeLLMon, please do not use Dynamax to ensure fairness.
@@ -99,3 +41,65 @@ Jolly Nature
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
+
+
+# Urshifu-Rapid-Strike @ Choice Band  
+# Ability: Unseen Fist  
+# EVs: 252 Atk / 4 Def / 252 Spe  
+# Jolly Nature  
+# - Surging Strikes  
+# - Close Combat  
+# - Aqua Jet  
+# - U-turn  
+
+# Heatran @ Air Balloon  
+# Ability: Flash Fire  
+# EVs: 252 SpA / 4 SpD / 252 Spe  
+# Timid Nature  
+# IVs: 0 Atk  
+# - Magma Storm  
+# - Taunt  
+# - Earth Power  
+# - Stealth Rock  
+
+# Rotom-Wash @ Leftovers  
+# Ability: Levitate  
+# Shiny: Yes  
+# EVs: 252 HP / 248 SpD / 8 Spe  
+# Calm Nature  
+# IVs: 0 Atk  
+# - Volt Switch  
+# - Hydro Pump  
+# - Thunder Wave  
+# - Pain Split  
+
+# Landorus-Therian (M) @ Leftovers  
+# Ability: Intimidate  
+# EVs: 248 HP / 8 Def / 252 SpD  
+# Careful Nature  
+# IVs: 23 Spe  
+# - Defog  
+# - Earthquake  
+# - U-turn  
+# - Knock Off  
+
+# Tapu Lele @ Choice Scarf  
+# Ability: Psychic Surge  
+# EVs: 252 SpA / 4 SpD / 252 Spe  
+# Timid Nature  
+# IVs: 0 Atk  
+# - Psyshock  
+# - Moonblast  
+# - Focus Blast  
+# - Future Sight  
+
+# Kartana @ Protective Pads  
+# Ability: Beast Boost  
+# Shiny: Yes  
+# EVs: 252 Atk / 4 SpD / 252 Spe  
+# Jolly Nature  
+# - Swords Dance  
+# - Knock Off  
+# - Sacred Sword  
+# - Leaf Blade
+
