@@ -77,11 +77,19 @@ for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
         f.close()
 
 df.to_csv('battle_metrics.csv',index=None)
-lost= df['Average HP'].isin([0]).sum(axis=0)
-win_rate =1-(lost /len(df))
 
+lost= 0
+avg_hp = 0
+for index, row in df.iterrows():
+    if row['Average HP'] != 0:
+        avg_hp += row['Average HP']
+    else:
+        lost+=1
 
-print('-----Metrics--------')
+win_rate = 1 - (lost /len(df))
+avg_hp = avg_hp/(len(df) - lost)
+
+print('-------Metrics--------')
 print('Battles Lost:\t\t',lost)
 print('Battles Won:\t\t',len(df) - lost)
 print('Total Battles:\t\t',len(df))
@@ -89,5 +97,5 @@ print('Win Rate: \t\t {:.2f}%'.format(win_rate*100))
 print('Average Turn Count: \t {:.2f}'.format(df['Turn Count'].mean()))
 print('Average Attack Count: \t {:.2f}'.format(df['Attack Count'].mean()))
 print('Average Switch Count: \t {:.2f}'.format(df['Switch Count'].mean()))
-print('Average HP: \t\t {:.2f}%'.format(df['Average HP'].mean()))
+print('Average HP: \t\t {:.2f}%'.format(avg_hp))
 
