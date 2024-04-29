@@ -38,7 +38,7 @@ async def main():
         try:
             await llm_player.ladder(1)
             for battle_id, battle in llm_player.battles.items():
-                with open(f"{args.log_dir}/{battle.opponent_username}.pkl", "wb") as f:
+                with open(f"{args.log_dir}/{battle.opponent_username}-{battle_id}.pkl", "wb") as f:
                     pkl.dump(battle, f)
         except:
             continue
