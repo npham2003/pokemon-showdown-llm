@@ -350,8 +350,8 @@ class LLMPlayer(Player):
         except:
             possible_move_prompt = ""
 
-        if possible_move_prompt:
-            opponent_prompt = opponent_prompt + f"{battle.opponent_active_pokemon.species}'s all the possible attacks:" + possible_move_prompt
+        # if possible_move_prompt:
+        #     opponent_prompt = opponent_prompt + f"{battle.opponent_active_pokemon.species}'s all the possible attacks:" + possible_move_prompt
 
         opponent_side_condition_list = [] # I should add the description for the side condition. and the status.
         for side_condition in battle.opponent_side_conditions:
