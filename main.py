@@ -174,7 +174,7 @@ driver.find_element(By.NAME, 'login').click()
 time.sleep(1)
 
 driver.find_element(By.NAME, 'username').click()
-driver.find_element(By.NAME, 'username').send_keys("literally an AI")
+driver.find_element(By.NAME, 'username').send_keys("berroooo")
 
 loginButtons = driver.find_elements(By.CLASS_NAME, 'button')
 
