@@ -5,7 +5,8 @@ import pandas as pd
 
 def metric_calculator(f,filename):
     '''
-    
+    Need to something to validate the log.
+    Need to add heals for HP.
     
     '''
     player="p1"
