@@ -39,6 +39,18 @@ def metric_calculator(f,filename):
                 attack_count+=1
             elif bool(re.search("\|switch\|", line)):
                 switch_count+=1
+        
+        if re.search('\|-heal\|',line) and re.search(player,line): 
+            if re.search('[\d]{1,3}\/[\d]{1,3}',line):   
+                text=re.findall('[\d]{1,3}\/[\d]{1,3}',line)[0]
+                num,dem = text.split('/')
+                perc=int(num)/int(dem)
+                for pokemon_name,tdic in pokemons.items():
+                    base = tdic['base_form']
+                    if re.search(pokemon_name,line) or re.search(base,line):
+                        pokemons[pokemon_name]= {'base_form':base,
+                                                'HP':perc}
+        
         if re.search('\|-damage\|',line) and re.search(player,line):
             if re.search('0 fnt',line):  # Pokemon is dead
                 pokemon_cnt -= 1
