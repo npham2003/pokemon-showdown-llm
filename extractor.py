@@ -2,11 +2,12 @@ import re
 import os
 import pandas as pd
 
-
+PLAYER_NAME = 'divyansh7877'
 
 def metric_calculator(f,filename):
     '''
-    
+    Need to something to validate the log.
+    Need to add heals for HP.
     
     '''
     player="p1"
@@ -18,12 +19,11 @@ def metric_calculator(f,filename):
     pokemons={}
 
     for line in f:
-        if bool(re.search('literally an ai', line)) and bool(re.search('player', line)):
+        if bool(re.search(PLAYER_NAME, line)) and bool(re.search('player', line)):
             if bool(re.search('p1', line)):
                 player="p1"
             elif bool(re.search('p2', line)):
                 player="p2"
-
         if re.search('\|poke\|',line) and re.search(player,line):  # Get pokemon names
             name_raw = line[9:]
             name_raw = name_raw.replace('|','').strip()
@@ -32,7 +32,6 @@ def metric_calculator(f,filename):
             pokemons[name]={'base_form':base,
                             'HP':1}
 
-
         if bool(re.search('\|turn\|', line)):
             turn_count+=1
         if bool(re.search(player,line)):
@@ -40,7 +39,20 @@ def metric_calculator(f,filename):
                 attack_count+=1
             elif bool(re.search("\|switch\|", line)):
                 switch_count+=1
-        if re.search('\|-damage\|',line) and re.search(player,line):
+         
+
+        if re.search('\|-heal\|',line) and re.search(player,line): #Player gets heal
+            if re.search('[\d]{1,3}\/[\d]{1,3}',line):   
+                text=re.findall('[\d]{1,3}\/[\d]{1,3}',line)[0]
+                num,dem = text.split('/')
+                perc=int(num)/int(dem)
+                for pokemon_name,tdic in pokemons.items():
+                    base = tdic['base_form']
+                    if re.search(pokemon_name,line) or re.search(base,line):
+                        pokemons[pokemon_name]= {'base_form':base,
+                                                'HP':perc}
+        
+        if re.search('\|-damage\|',line) and re.search(player,line):   # Player takes damage
             if re.search('0 fnt',line):  # Pokemon is dead
                 pokemon_cnt -= 1
                 for pokemon_name,tdic in pokemons.items():
@@ -59,6 +71,13 @@ def metric_calculator(f,filename):
                     if re.search(pokemon_name,line) or re.search(base,line):
                         pokemons[pokemon_name]= {'base_form':base,
                                                 'HP':perc}
+                        
+        if re.search('\|faint\|',line) and re.search(player,line):   # Player faints, aka dead
+            for pokemon_name,tdic in pokemons.items():
+                    base = tdic['base_form']
+                    if re.search(pokemon_name,line) or re.search(base,line):
+                        pokemons[pokemon_name]= {'base_form':base,
+                                                'HP':0}
     if len(pokemons) == 0:
         avg_hp = 0
     else:
@@ -70,18 +89,39 @@ def metric_calculator(f,filename):
 
 df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average HP','Pokemons','File'])
 
-for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
-    if file.endswith(".html") and re.search('literally an ai',file):
-        filename=os.path.join("battle_log/pokellmon_vs_invited_player", file)
+
+# You can to check specific logs, you can create a list of file names and place here.file
+
+filepath = "C:/Users/Divya/Downloads/div logs"
+#"C:\Users\Divya\Downloads\logs\logs\context\dalubek - battle-gen8ou-82.html"
+for file in os.listdir(filepath):
+    if file.endswith(".html") and re.search(PLAYER_NAME,file):
+        filename=os.path.join(filepath, file)
+        print(filename)
         f =open(filename)
         metric = metric_calculator(f,filename)
         df.loc[len(df.index)] = metric
         f.close()
 
-df.to_csv('battle_metrics.csv',index=None)
-lost= df['Average HP'].isin([0]).sum(axis=0)
-win_rate =lost /len(df)
-print('-----Metrics--------')
+# You may also change the csv name for particular test
+df.to_csv('battle_metrics_wo_context_5_5_div.csv',index=None)
+
+lost= 0
+avg_hp = 0
+for index, row in df.iterrows():
+    if row['Average HP'] != 0:
+        avg_hp += row['Average HP']
+    else:
+        lost+=1
+
+win_rate = 1 - (lost /len(df))
+
+try:
+    avg_hp = avg_hp/(len(df) - lost)
+except:
+    avg_hp = 0
+
+print('-------Metrics--------')
 print('Battles Lost:\t\t',lost)
 print('Battles Won:\t\t',len(df) - lost)
 print('Total Battles:\t\t',len(df))
@@ -89,8 +129,5 @@ print('Win Rate: \t\t {:.2f}%'.format(win_rate*100))
 print('Average Turn Count: \t {:.2f}'.format(df['Turn Count'].mean()))
 print('Average Attack Count: \t {:.2f}'.format(df['Attack Count'].mean()))
 print('Average Switch Count: \t {:.2f}'.format(df['Switch Count'].mean()))
-print('Average HP: \t\t {:.2f}%'.format(df['Average HP'].mean()))
-
-
-
+print('Average HP: \t\t {:.2f}%'.format(avg_hp))
 
