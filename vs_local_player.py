@@ -6,6 +6,7 @@ import pickle as pkl
 from tqdm import tqdm
 import argparse
 import os
+from prompted_team import output_team
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--backend", type=str, default="gpt-4-0125-preview", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
@@ -20,6 +21,7 @@ async def main():
 
 
     os.makedirs(args.log_dir, exist_ok=True)
+    myteam = output_team()
     llm_player = LLMPlayer(battle_format="gen8ou",
                            api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
