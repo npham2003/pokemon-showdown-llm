@@ -22,12 +22,12 @@ async def main():
 
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8randombattle",
-                           api_key="Your_openai_api_key",
+                           api_key="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",
                            backend=args.backend,
                            temperature=args.temperature,
                            prompt_algo=args.prompt_algo,
                            log_dir=args.log_dir,
-                           account_configuration=AccountConfiguration("Your_account", "Your_password"),
+                           account_configuration=AccountConfiguration("oklabaraa", "osos12@1"),
                            save_replays=args.log_dir
                            )
 
