@@ -36,7 +36,7 @@ async def main():
     llm_player._dynamax_disable = True # If you choose to disable Dynamax for PokeLLMon, please do not use Dynamax to ensure fairness.
 
     # Playing 5 games on local
-    for i in tqdm(range(5)):
+    for i in tqdm(range(1)):
         try:
             await llm_player.ladder(1)
             for battle_id, battle in llm_player.battles.items():
