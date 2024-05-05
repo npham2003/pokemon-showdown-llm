@@ -39,8 +39,9 @@ def metric_calculator(f,filename):
                 attack_count+=1
             elif bool(re.search("\|switch\|", line)):
                 switch_count+=1
-        
-        if re.search('\|-heal\|',line) and re.search(player,line): 
+         
+
+        if re.search('\|-heal\|',line) and re.search(player,line): #Player gets heal
             if re.search('[\d]{1,3}\/[\d]{1,3}',line):   
                 text=re.findall('[\d]{1,3}\/[\d]{1,3}',line)[0]
                 num,dem = text.split('/')
@@ -51,7 +52,7 @@ def metric_calculator(f,filename):
                         pokemons[pokemon_name]= {'base_form':base,
                                                 'HP':perc}
         
-        if re.search('\|-damage\|',line) and re.search(player,line):
+        if re.search('\|-damage\|',line) and re.search(player,line):   # Player takes damage
             if re.search('0 fnt',line):  # Pokemon is dead
                 pokemon_cnt -= 1
                 for pokemon_name,tdic in pokemons.items():
@@ -70,6 +71,13 @@ def metric_calculator(f,filename):
                     if re.search(pokemon_name,line) or re.search(base,line):
                         pokemons[pokemon_name]= {'base_form':base,
                                                 'HP':perc}
+                        
+        if re.search('\|faint\|',line) and re.search(player,line):   # Player faints, aka dead
+            for pokemon_name,tdic in pokemons.items():
+                    base = tdic['base_form']
+                    if re.search(pokemon_name,line) or re.search(base,line):
+                        pokemons[pokemon_name]= {'base_form':base,
+                                                'HP':0}
     if len(pokemons) == 0:
         avg_hp = 0
     else:
@@ -96,7 +104,7 @@ for file in os.listdir(filepath):
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_wo_context_5_5.csv',index=None)
+df.to_csv('battle_metrics_wo_context_5_5_div.csv',index=None)
 
 lost= 0
 avg_hp = 0
@@ -107,6 +115,7 @@ for index, row in df.iterrows():
         lost+=1
 
 win_rate = 1 - (lost /len(df))
+
 try:
     avg_hp = avg_hp/(len(df) - lost)
 except:
