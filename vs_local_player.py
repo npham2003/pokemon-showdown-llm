@@ -9,7 +9,7 @@ import os
 from prompted_team import output_team
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--backend", type=str, default="gpt-4-0125-preview", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
+parser.add_argument("--backend", type=str, default="gpt-4-turbo", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
 parser.add_argument("--temperature", type=float, default=0.8)
 parser.add_argument("--prompt_algo", default="io", choices=["io", "sc", "cot", "tot"])
 parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_invited_player")
@@ -17,11 +17,11 @@ args = parser.parse_args()
 
 async def main():
 
-    opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('azrael001')
-
+    opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('AqoursBaelz')
 
     os.makedirs(args.log_dir, exist_ok=True)
-    myteam = output_team()
+    myteam = output_team(opponentMeta)
+    #myteam = output_team()
     llm_player = LLMPlayer(battle_format="gen8ou",
                            api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
@@ -30,7 +30,7 @@ async def main():
                            log_dir=args.log_dir,
                            account_configuration=AccountConfiguration("literally an ai", "NYUTesting"),
                            save_replays=args.log_dir,
-                           team="Urshifu-Rapid-Strike||choiceband|unseenfist|surgingstrikes,closecombat,aquajet,uturn|Jolly|,252,4,,,252|||||]Heatran||airballoon|flashfire|magmastorm,taunt,earthpower,stealthrock|Timid|,,,252,4,252||,0,,,,|||]Rotom-Wash||leftovers|levitate|voltswitch,hydropump,thunderwave,painsplit|Calm|252,,,,248,8||,0,,,,|||]Landorus-Therian||leftovers|intimidate|defog,earthquake,uturn,knockoff|Careful|248,,8,,252,||,,,,,23|||]Tapu Lele||choicescarf|psychicsurge|psyshock,moonblast,focusblast,futuresight|Timid|,,,252,4,252||,0,,,,|||]Kartana||protectivepads|beastboost|swordsdance,knockoff,sacredsword,leafblade|Jolly|,252,,,4,252|||||"
+                           team=myteam
                            )
 
     llm_player._dynamax_disable = True # If you choose to disable Dynamax for PokeLLMon, please do not use Dynamax to ensure fairness.
