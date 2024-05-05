@@ -6,7 +6,7 @@ from poke_env import AccountConfiguration, ShowdownServerConfiguration
 import os
 import pickle as pkl
 import argparse
-
+from prompted_team import output_team
 from poke_env.player import LLMPlayer, SimpleHeuristicsPlayer
 
 parser = argparse.ArgumentParser()
@@ -18,17 +18,18 @@ args = parser.parse_args()
 
 async def main():
 
-    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8randombattle")
+    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou")
 
     os.makedirs(args.log_dir, exist_ok=True)
-    llm_player = LLMPlayer(battle_format="gen8randombattle",
-                           api_key="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",
+    llm_player = LLMPlayer(battle_format="gen8ou",
+                           api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
                            temperature=args.temperature,
                            prompt_algo=args.prompt_algo,
                            log_dir=args.log_dir,
-                           account_configuration=AccountConfiguration("oklabaraa", "osos12@1"),
-                           save_replays=args.log_dir
+                           account_configuration=AccountConfiguration("divyansh7877", "123456789"),
+                           save_replays=args.log_dir,
+                           team = output_team(context=False)
                            )
 
     # dynamax is disabled for local battles.
