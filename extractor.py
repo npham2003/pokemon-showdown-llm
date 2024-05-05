@@ -81,6 +81,9 @@ def metric_calculator(f,filename):
 
 df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average HP','Pokemons','File'])
 
+
+# You can to check specific logs, you can create a list of file names and place here.
+
 for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
     if file.endswith(".html") and re.search('literally an ai',file):
         filename=os.path.join("battle_log/pokellmon_vs_invited_player", file)
@@ -89,6 +92,7 @@ for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
         df.loc[len(df.index)] = metric
         f.close()
 
+# You may also change the csv name for particular test
 df.to_csv('battle_metrics.csv',index=None)
 
 lost= 0

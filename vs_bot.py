@@ -27,7 +27,7 @@ async def main():
                            temperature=args.temperature,
                            prompt_algo=args.prompt_algo,
                            log_dir=args.log_dir,
-                           account_configuration=AccountConfiguration("Your_account", "Your_password"),
+                           account_configuration=AccountConfiguration("divyansh7877", "123456789"),
                            save_replays=args.log_dir
                            )
 
