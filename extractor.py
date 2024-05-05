@@ -2,7 +2,7 @@ import re
 import os
 import pandas as pd
 
-PLAYER_NAME = 'dalubek'
+PLAYER_NAME = 'divyansh7877'
 
 def metric_calculator(f,filename):
     '''
@@ -24,7 +24,6 @@ def metric_calculator(f,filename):
                 player="p1"
             elif bool(re.search('p2', line)):
                 player="p2"
-
         if re.search('\|poke\|',line) and re.search(player,line):  # Get pokemon names
             name_raw = line[9:]
             name_raw = name_raw.replace('|','').strip()
@@ -85,7 +84,7 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = "C:/Users/Divya/Downloads/logs/logs/context/"
+filepath = "C:/Users/Divya/Downloads/div logs"
 #"C:\Users\Divya\Downloads\logs\logs\context\dalubek - battle-gen8ou-82.html"
 for file in os.listdir(filepath):
     if file.endswith(".html") and re.search(PLAYER_NAME,file):
@@ -97,7 +96,7 @@ for file in os.listdir(filepath):
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_context_5_5.csv',index=None)
+df.to_csv('battle_metrics_wo_context_5_5.csv',index=None)
 
 lost= 0
 avg_hp = 0
