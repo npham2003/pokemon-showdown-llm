@@ -2,6 +2,7 @@ import re
 import os
 import pandas as pd
 
+PLAYER_NAME = 'dalubek'
 
 def metric_calculator(f,filename):
     '''
@@ -18,7 +19,7 @@ def metric_calculator(f,filename):
     pokemons={}
 
     for line in f:
-        if bool(re.search('literally an ai', line)) and bool(re.search('player', line)):
+        if bool(re.search(PLAYER_NAME, line)) and bool(re.search('player', line)):
             if bool(re.search('p1', line)):
                 player="p1"
             elif bool(re.search('p2', line)):
@@ -82,18 +83,21 @@ def metric_calculator(f,filename):
 df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average HP','Pokemons','File'])
 
 
-# You can to check specific logs, you can create a list of file names and place here.
+# You can to check specific logs, you can create a list of file names and place here.file
 
-for file in os.listdir("battle_log/pokellmon_vs_invited_player"):
-    if file.endswith(".html") and re.search('literally an ai',file):
-        filename=os.path.join("battle_log/pokellmon_vs_invited_player", file)
+filepath = "C:/Users/Divya/Downloads/logs/logs/context/"
+#"C:\Users\Divya\Downloads\logs\logs\context\dalubek - battle-gen8ou-82.html"
+for file in os.listdir(filepath):
+    if file.endswith(".html") and re.search(PLAYER_NAME,file):
+        filename=os.path.join(filepath, file)
+        print(filename)
         f =open(filename)
         metric = metric_calculator(f,filename)
         df.loc[len(df.index)] = metric
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics.csv',index=None)
+df.to_csv('battle_metrics_context_5_5.csv',index=None)
 
 lost= 0
 avg_hp = 0
@@ -104,7 +108,10 @@ for index, row in df.iterrows():
         lost+=1
 
 win_rate = 1 - (lost /len(df))
-avg_hp = avg_hp/(len(df) - lost)
+try:
+    avg_hp = avg_hp/(len(df) - lost)
+except:
+    avg_hp = 0
 
 print('-------Metrics--------')
 print('Battles Lost:\t\t',lost)
