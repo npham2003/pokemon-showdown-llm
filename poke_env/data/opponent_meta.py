@@ -16,7 +16,7 @@ class OpponentMeta:
                     meta["win_count"] = meta.get("win_count", 0) + 1 if battle.won else meta.get("win_count", 0)
                     for key in battle.opponent_team:
                         opponent_pokemon[key[key.find(':') + 1:]] = opponent_pokemon.get(key[key.find(':') + 1:], 0) + 1
-                """ Adds battle log to meta
+
                     if battle.opponent_role == "p1":
                         dic = {"p1a":"Opponent", "Player1": "Opponent", "p2a": "Player", "Player2": "Player"}
                         battle_history = self._replace_all(battle_history, dic)
@@ -25,8 +25,8 @@ class OpponentMeta:
                                                            {"p1a": "Player", "Player1": "Player", "p2a": "Opponent",
                                                             "Player2": "Opponent"})
                 meta[battle.battle_tag] = battle_history
-                """
-        meta["opponent_pokemon"] = opponent_pokemon
+        if meta:
+            meta["opponent_pokemon"] = opponent_pokemon
         return meta
 
     @staticmethod
