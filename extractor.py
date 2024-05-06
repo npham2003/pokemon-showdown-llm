@@ -92,7 +92,7 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = "C:/Users/Divya/Downloads/div logs"
+filepath = 'battle_log\pokellmon_vs_bot\without_context'
 #"C:\Users\Divya\Downloads\logs\logs\context\dalubek - battle-gen8ou-82.html"
 for file in os.listdir(filepath):
     if file.endswith(".html") and re.search(PLAYER_NAME,file):
