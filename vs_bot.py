@@ -13,70 +13,65 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--backend", type=str, default="gpt-4-turbo", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
 parser.add_argument("--temperature", type=float, default=0.8)
 parser.add_argument("--prompt_algo", default="io", choices=["io", "sc", "cot", "tot"])
-parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/without_context/")
+parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/with_context_gpt_4_turbo/")
 args = parser.parse_args()
 
 async def main():
 
-    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team="""Urshifu-Rapid-Strike @ Choice Band  
-Ability: Unseen Fist  
-EVs: 252 Atk / 4 Def / 252 Spe  
-Jolly Nature  
-- Surging Strikes  
-- Close Combat  
-- Aqua Jet  
-- U-turn  
-
-Heatran @ Air Balloon  
-Ability: Flash Fire  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Magma Storm  
-- Taunt  
-- Earth Power  
-- Stealth Rock  
-
-Rotom-Wash @ Leftovers  
-Ability: Levitate  
-Shiny: Yes  
-EVs: 252 HP / 248 SpD / 8 Spe  
-Calm Nature  
-IVs: 0 Atk  
-- Volt Switch  
-- Hydro Pump  
-- Thunder Wave  
-- Pain Split  
-
-Landorus-Therian (M) @ Leftovers  
-Ability: Intimidate  
-EVs: 248 HP / 8 Def / 252 SpD  
-Careful Nature  
-IVs: 23 Spe  
-- Defog  
-- Earthquake  
-- U-turn  
-- Knock Off  
-
-Tapu Lele @ Choice Scarf  
-Ability: Psychic Surge  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Psyshock  
-- Moonblast  
-- Focus Blast  
-- Future Sight  
-
-Kartana @ Protective Pads  
-Ability: Beast Boost  
-Shiny: Yes  
-EVs: 252 Atk / 4 SpD / 252 Spe  
-Jolly Nature  
+    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team="""Rillaboom @ Leftovers  
+Ability: Grassy Surge  
+EVs: 236 HP / 252 Atk / 20 Spe  
+Adamant Nature  
 - Swords Dance  
+- Grassy Glide  
 - Knock Off  
-- Sacred Sword  
-- Leaf Blade""")
+- Drain Punch  
+
+Tornadus-Therian (M) @ Heavy-Duty Boots  
+Ability: Regenerator  
+EVs: 252 HP / 52 Def / 40 SpD / 164 Spe  
+Timid Nature  
+- Heat Wave  
+- Knock Off  
+- U-turn  
+- Defog  
+
+Blaziken @ Leftovers  
+Ability: Speed Boost  
+EVs: 144 HP / 252 Atk / 112 Spe  
+Adamant Nature  
+- Swords Dance  
+- Close Combat  
+- Flare Blitz  
+- Protect  
+
+Melmetal @ Leftovers  
+Ability: Iron Fist  
+EVs: 20 HP / 232 Atk / 224 SpD / 32 Spe  
+Adamant Nature  
+- Double Iron Bash  
+- Superpower  
+- Thunder Punch  
+- Protect  
+
+Garchomp @ Leftovers  
+Ability: Rough Skin  
+EVs: 240 HP / 252 SpD / 16 Spe  
+Careful Nature  
+- Stealth Rock  
+- Earthquake  
+- Toxic  
+- Protect  
+
+Slowbro @ Rocky Helmet  
+Ability: Regenerator  
+EVs: 252 HP / 252 Def / 4 SpD  
+Relaxed Nature  
+IVs: 0 Atk / 0 Spe  
+- Scald  
+- Future Sight  
+- Toxic  
+- Teleport""")
 
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8ou",
@@ -87,7 +82,7 @@ Jolly Nature
                            log_dir=args.log_dir,
                            account_configuration=AccountConfiguration("divyansh7877", "123456789"),
                            save_replays=args.log_dir,
-                           team=output_team(opponent_meta=False,context=False)
+                           team=output_team(opponent_meta=False,context=True)
                            )
 
     # dynamax is disabled for local battles.
