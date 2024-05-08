@@ -16,9 +16,69 @@ parser.add_argument("--prompt_algo", default="io", choices=["io", "sc", "cot", "
 parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/with_context_gpt_4_turbo/")
 args = parser.parse_args()
 
-async def main():
+team1= """Urshifu-Rapid-Strike @ Choice Band  
+Ability: Unseen Fist  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Jolly Nature  
+- Surging Strikes  
+- Close Combat  
+- Aqua Jet  
+- U-turn  
 
-    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team="""Rillaboom @ Leftovers  
+Heatran @ Air Balloon  
+Ability: Flash Fire  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Magma Storm  
+- Taunt  
+- Earth Power  
+- Stealth Rock  
+
+Rotom-Wash @ Leftovers  
+Ability: Levitate  
+Shiny: Yes  
+EVs: 252 HP / 248 SpD / 8 Spe  
+Calm Nature  
+IVs: 0 Atk  
+- Volt Switch  
+- Hydro Pump  
+- Thunder Wave  
+- Pain Split  
+
+Landorus-Therian (M) @ Leftovers  
+Ability: Intimidate  
+EVs: 248 HP / 8 Def / 252 SpD  
+Careful Nature  
+IVs: 23 Spe  
+- Defog  
+- Earthquake  
+- U-turn  
+- Knock Off  
+
+Tapu Lele @ Choice Scarf  
+Ability: Psychic Surge  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Psyshock  
+- Moonblast  
+- Focus Blast  
+- Future Sight  
+
+Kartana @ Protective Pads  
+Ability: Beast Boost  
+Shiny: Yes  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Swords Dance  
+- Knock Off  
+- Sacred Sword  
+- Leaf Blade"""
+
+
+
+team2="""Rillaboom @ Leftovers  
 Ability: Grassy Surge  
 EVs: 236 HP / 252 Atk / 20 Spe  
 Adamant Nature  
@@ -71,7 +131,13 @@ IVs: 0 Atk / 0 Spe
 - Scald  
 - Future Sight  
 - Toxic  
-- Teleport""")
+- Teleport"""
+
+
+
+async def main():
+
+    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team1)
 
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8ou",
