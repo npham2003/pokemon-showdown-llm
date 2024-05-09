@@ -720,7 +720,8 @@ class LLMPlayer(Player):
                                               max_tokens=100,
                                               # stop=["reason"],
                                               json_format=True)
-                    print("LLM output:", llm_output)
+                    print('LLM Working, iteration:',i)
+                    #print("LLM output:", llm_output)
                     next_action = self.parse(llm_output, battle)
                     with open(f"{self.log_dir}/output.jsonl", "a") as f:
                         f.write(json.dumps({"turn": battle.turn,
@@ -731,6 +732,7 @@ class LLMPlayer(Player):
                                             }) + "\n")
                     break
                 except:
+                    print('Haha LLM not working')
                     continue
             if next_action is None:
                 next_action = self.choose_max_damage_move(battle)

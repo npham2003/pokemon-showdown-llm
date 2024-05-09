@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-86</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-86<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-86|init|battle
+|title|divyansh7877 vs. SimpleHeuristics 1
+|j|☆divyansh7877
+|j|☆SimpleHeuristics 1
+|gametype|singles
+|player|p1|divyansh7877|169|
+|player|p2|SimpleHeuristics 1|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Weavile, F|
+|poke|p1|Skarmory, F|
+|poke|p1|Zapdos|
+|poke|p1|Landorus-Therian, M|
+|poke|p1|Slowking-Galar, M|
+|poke|p1|Ferrothorn, F|
+|poke|p2|Urshifu-*, M|
+|poke|p2|Heatran, F|
+|poke|p2|Rotom-Wash|
+|poke|p2|Landorus-Therian, M|
+|poke|p2|Tapu Lele|
+|poke|p2|Kartana|
+|teampreview
+|start
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|switch|p2a: Urshifu|Urshifu-Rapid-Strike, M|100/100
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Urshifu|atk|1
+|turn|1
+|move|p1a: Landorus|Earthquake|p2a: Urshifu
+|-damage|p2a: Urshifu|40/100
+|move|p2a: Urshifu|Surging Strikes|p1a: Landorus
+|-supereffective|p1a: Landorus
+|-crit|p1a: Landorus
+|-damage|p1a: Landorus|91/319
+|-supereffective|p1a: Landorus
+|-crit|p1a: Landorus
+|-damage|p1a: Landorus|0 fnt
+|faint|p1a: Landorus
+|-hitcount|p1: Landorus|2
+|upkeep
+|switch|p1a: Zapdos|Zapdos|383/383
+|turn|2
+|move|p1a: Zapdos|Volt Switch|p2a: Urshifu
+|-supereffective|p2a: Urshifu
+|-damage|p2a: Urshifu|0 fnt
+|faint|p2a: Urshifu
+|switch|p1a: Ferrothorn|Ferrothorn, F|352/352|[from] Volt Switch
+|upkeep
+|switch|p2a: Rotom|Rotom-Wash, shiny|100/100
+|turn|3
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|292/352
+|move|p1a: Ferrothorn|Leech Seed|p2a: Rotom
+|-start|p2a: Rotom|move: Leech Seed
+|-damage|p2a: Rotom|88/100|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|330/352|[silent]
+|upkeep
+|turn|4
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|271/352
+|move|p1a: Ferrothorn|Gyro Ball|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|76/100
+|-heal|p2a: Rotom|82/100|[from] item: Leftovers
+|-damage|p2a: Rotom|70/100|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|309/352|[silent]
+|upkeep
+|turn|5
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn|[miss]
+|-miss|p2a: Rotom|p1a: Ferrothorn
+|move|p1a: Ferrothorn|Leech Seed|p2a: Rotom|[miss]
+|-miss|p1a: Ferrothorn|p2a: Rotom
+|-heal|p2a: Rotom|76/100|[from] item: Leftovers
+|-damage|p2a: Rotom|64/100|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|347/352|[silent]
+|upkeep
+|turn|6
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|284/352
+|move|p1a: Ferrothorn|Spikes|p2a: Rotom
+|-sidestart|p2: SimpleHeuristics 1|Spikes
+|-heal|p2a: Rotom|70/100|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|322/352|[silent]
+|upkeep
+|turn|7
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|260/352
+|move|p1a: Ferrothorn|Knock Off|p2a: Rotom
+|-damage|p2a: Rotom|35/100
+|-enditem|p2a: Rotom|Leftovers|[from] move: Knock Off|[of] p1a: Ferrothorn
+|-damage|p2a: Rotom|22/100|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|298/352|[silent]
+|upkeep
+|turn|8
+|move|p2a: Rotom|Hydro Pump|p1a: Ferrothorn|[miss]
+|-miss|p2a: Rotom|p1a: Ferrothorn
+|move|p1a: Ferrothorn|Knock Off|p2a: Rotom
+|-crit|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|upkeep
+|switch|p2a: Heatran|Heatran, F|100/100
+|-item|p2a: Heatran|Air Balloon
+|turn|9
+|switch|p1a: Zapdos|Zapdos|383/383
+|move|p2a: Heatran|Magma Storm|p1a: Zapdos
+|-damage|p1a: Zapdos|175/383
+|-activate|p1a: Zapdos|move: Magma Storm|[of] p2a: Heatran
+|-damage|p1a: Zapdos|128/383|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|10
+|move|p1a: Zapdos|Roost|p1a: Zapdos
+|-heal|p1a: Zapdos|320/383
+|-singleturn|p1a: Zapdos|move: Roost
+|move|p2a: Heatran|Magma Storm|p1a: Zapdos
+|-damage|p1a: Zapdos|139/383
+|-damage|p1a: Zapdos|92/383|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|11
+|move|p1a: Zapdos|Volt Switch|p2a: Heatran
+|-damage|p2a: Heatran|70/100
+|-enditem|p2a: Heatran|Air Balloon
+|switch|p1a: Slowking|Slowking-Galar, M|394/394|[from] Volt Switch
+|move|p2a: Heatran|Magma Storm|p1a: Slowking|[miss]
+|-miss|p2a: Heatran|p1a: Slowking
+|upkeep
+|turn|12
+|move|p2a: Heatran|Earth Power|p1a: Slowking
+|-supereffective|p1a: Slowking
+|-damage|p1a: Slowking|214/394
+|move|p1a: Slowking|Scald|p2a: Heatran
+|-supereffective|p2a: Heatran
+|-damage|p2a: Heatran|14/100
+|-heal|p1a: Slowking|238/394|[from] item: Black Sludge
+|upkeep
+|turn|13
+|move|p2a: Heatran|Earth Power|p1a: Slowking
+|-supereffective|p1a: Slowking
+|-damage|p1a: Slowking|30/394
+|move|p1a: Slowking|Scald|p2a: Heatran
+|-supereffective|p2a: Heatran
+|-damage|p2a: Heatran|0 fnt
+|faint|p2a: Heatran
+|-heal|p1a: Slowking|54/394|[from] item: Black Sludge
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|100/100
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Slowking|atk|1
+|turn|14
+|switch|p1a: Weavile|Weavile, F|251/251
+|-ability|p1a: Weavile|Pressure
+|move|p2a: Landorus|Defog|p1a: Weavile
+|-unboost|p1a: Weavile|evasion|1
+|-sideend|p2: SimpleHeuristics 1|Spikes|[from] move: Defog|[of] p2a: Landorus
+|upkeep
+|turn|15
+|switch|p2a: Tapu Lele|Tapu Lele|100/100
+|-fieldstart|move: Psychic Terrain|[from] ability: Psychic Surge|[of] p2a: Tapu Lele
+|move|p1a: Weavile|Triple Axel|p2a: Tapu Lele
+|-damage|p2a: Tapu Lele|84/100
+|-damage|p2a: Tapu Lele|51/100
+|-crit|p2a: Tapu Lele
+|-damage|p2a: Tapu Lele|0 fnt
+|faint|p2a: Tapu Lele
+|-hitcount|p2: Tapu Lele|3
+|upkeep
+|switch|p2a: Kartana|Kartana, shiny|100/100
+|turn|16
+|move|p1a: Weavile|Knock Off|p2a: Kartana
+|-damage|p2a: Kartana|54/100
+|-enditem|p2a: Kartana|Protective Pads|[from] move: Knock Off|[of] p1a: Weavile
+|move|p2a: Kartana|Swords Dance|p2a: Kartana
+|-boost|p2a: Kartana|atk|2
+|upkeep
+|turn|17
+|move|p1a: Weavile|Triple Axel|p2a: Kartana
+|-damage|p2a: Kartana|43/100
+|-damage|p2a: Kartana|21/100
+|-damage|p2a: Kartana|0 fnt
+|faint|p2a: Kartana
+|-hitcount|p2: Kartana|3
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|100/100
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Weavile|atk|1
+|turn|18
+|move|p1a: Weavile|Triple Axel|p2a: Landorus
+|-supereffective|p2a: Landorus
+|-damage|p2a: Landorus|71/100
+|-supereffective|p2a: Landorus
+|-damage|p2a: Landorus|20/100
+|-supereffective|p2a: Landorus
+|-damage|p2a: Landorus|0 fnt
+|faint|p2a: Landorus
+|-hitcount|p2: Landorus|3
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

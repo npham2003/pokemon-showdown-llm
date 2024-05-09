@@ -13,10 +13,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--backend", type=str, default="gpt-4-turbo", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
 parser.add_argument("--temperature", type=float, default=0.8)
 parser.add_argument("--prompt_algo", default="io", choices=["io", "sc", "cot", "tot"])
-parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/with_context_gpt_4_turbo/")
+parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/with_context_gpt_4_turbo_5_9/")
 args = parser.parse_args()
 
-team1= """Urshifu-Rapid-Strike @ Choice Band  
+
+async def main():
+    
+    team1= """Urshifu-Rapid-Strike @ Choice Band  
 Ability: Unseen Fist  
 EVs: 252 Atk / 4 Def / 252 Spe  
 Jolly Nature  
@@ -78,7 +81,7 @@ Jolly Nature
 
 
 
-team2="""Rillaboom @ Leftovers  
+    team2="""Rillaboom @ Leftovers  
 Ability: Grassy Surge  
 EVs: 236 HP / 252 Atk / 20 Spe  
 Adamant Nature  
@@ -135,13 +138,11 @@ IVs: 0 Atk / 0 Spe
 
 
 
-async def main():
-
-    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team1)
+    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team2)
 
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8ou",
-                           api_key="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",
+                           api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
                            temperature=args.temperature,
                            prompt_algo=args.prompt_algo,
