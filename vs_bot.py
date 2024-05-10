@@ -8,6 +8,7 @@ import pickle as pkl
 import argparse
 from prompted_team import output_team
 from poke_env.player import LLMPlayer, SimpleHeuristicsPlayer
+from poke_env.data import opponent_meta
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--backend", type=str, default="gpt-4-turbo", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
@@ -111,7 +112,6 @@ Adamant Nature
 Melmetal @ Leftovers  
 Ability: Iron Fist  
 EVs: 20 HP / 232 Atk / 224 SpD / 32 Spe  
-Adamant Nature  
 - Double Iron Bash  
 - Superpower  
 - Thunder Punch  
@@ -139,7 +139,9 @@ IVs: 0 Atk / 0 Spe
 
 
     heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team2)
-
+    opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('divyansh7877')
+    os.makedirs(args.log_dir, exist_ok=True)
+    myteam = output_team(opponent_meta=opponentMeta,context=True)
     os.makedirs(args.log_dir, exist_ok=True)
     llm_player = LLMPlayer(battle_format="gen8ou",
                            api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
@@ -149,7 +151,7 @@ IVs: 0 Atk / 0 Spe
                            log_dir=args.log_dir,
                            account_configuration=AccountConfiguration("divyansh7877", "123456789"),
                            save_replays=args.log_dir,
-                           team=output_team(opponent_meta=False,context=True)
+                           team=myteam
                            )
 
     # dynamax is disabled for local battles.
