@@ -20,8 +20,8 @@ async def main():
     opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('AqoursBaelz')
 
     os.makedirs(args.log_dir, exist_ok=True)
-    myteam = output_team(opponentMeta)
-    #myteam = output_team()
+    # myteam = output_team(opponentMeta)
+    myteam = output_team()
     llm_player = LLMPlayer(battle_format="gen8ou",
                            api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",
                            backend=args.backend,
@@ -36,7 +36,7 @@ async def main():
     llm_player._dynamax_disable = True # If you choose to disable Dynamax for PokeLLMon, please do not use Dynamax to ensure fairness.
 
     # Playing 5 games on local
-    for i in tqdm(range(1)):
+    for i in tqdm(range(5)):
         try:
             await llm_player.ladder(1)
             for battle_id, battle in llm_player.battles.items():
