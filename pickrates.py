@@ -2,7 +2,7 @@ import pandas as pd
 import ast
 
 #Paste the path to the csv generated.
-csvpath = 'battle_metrics_without_context_5_9_div.csv'
+csvpath = 'battle_metrics_with_context_nick.csv'
 df = pd.read_csv(csvpath)
 pickrates= {}
 

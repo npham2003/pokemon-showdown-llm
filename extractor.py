@@ -2,7 +2,7 @@ import re
 import os
 import pandas as pd
 
-PLAYER_NAME = 'divyansh7877'
+PLAYER_NAME = 'literally an ai'
 
 def metric_calculator(f,filename):
     '''
@@ -92,9 +92,10 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = 'battle_log\pokellmon_vs_bot\without_context_gpt_4_turbo_5_9'
+filepath = 'battle_log\pokellmon_vs_invited_player'
 
 for file in os.listdir(filepath):
+
     if file.endswith(".html") and re.search(PLAYER_NAME,file):
         filename=os.path.join(filepath, file)
         print(filename)
@@ -104,7 +105,7 @@ for file in os.listdir(filepath):
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_without_context_5_9_div.csv',index=None)
+df.to_csv('battle_metrics_with_context_nick.csv',index=None)
 
 lost= 0
 avg_hp = 0
@@ -114,6 +115,7 @@ for index, row in df.iterrows():
     else:
         lost+=1
 
+print(lost)
 win_rate = 1 - (lost /len(df))
 
 try:
