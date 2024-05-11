@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-106</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-106<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">literally an ai</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">AqoursBaelz</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-106|init|battle
+|title|AqoursBaelz vs. literally an ai
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|j|☆AqoursBaelz
+|j|☆literally an ai
+|gametype|singles
+|player|p1|AqoursBaelz|170|1410
+|player|p2|literally an ai|170|1002
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rated|
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Pelipper, F|
+|poke|p1|Seismitoad, M|
+|poke|p1|Zapdos|
+|poke|p1|Ferrothorn, F|
+|poke|p1|Barraskewda, F|
+|poke|p1|Crawdaunt, M|
+|poke|p2|Weavile, F|
+|poke|p2|Landorus-Therian, M|
+|poke|p2|Kartana|
+|poke|p2|Zapdos|
+|poke|p2|Melmetal|
+|poke|p2|Tyranitar, M|
+|teampreview
+|start
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|switch|p2a: Landorus|Landorus-Therian, M|319/319
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Pelipper|atk|1
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|turn|1
+|switch|p1a: Ferrothorn|Ferrothorn, F|100/100
+|move|p2a: Landorus|Stone Edge|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|88/100
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Ferrothorn|94/100|[from] item: Leftovers
+|upkeep
+|turn|2
+|switch|p2a: Tyranitar|Tyranitar, M|404/404
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|move|p1a: Ferrothorn|Stealth Rock|p2a: Tyranitar
+|-sidestart|p2: literally an ai|move: Stealth Rock
+|-weather|Sandstorm|[upkeep]
+|-heal|p1a: Ferrothorn|99/100|[from] item: Leftovers
+|upkeep
+|turn|3
+|move|p2a: Tyranitar|Fire Punch|p1a: Ferrothorn
+|-supereffective|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|24/100
+|-damage|p2a: Tyranitar|354/404|[from] ability: Iron Barbs|[of] p1a: Ferrothorn
+|move|p1a: Ferrothorn|Gyro Ball|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|148/404
+|-weather|Sandstorm|[upkeep]
+|-heal|p2a: Tyranitar|173/404|[from] item: Leftovers
+|-heal|p1a: Ferrothorn|30/100|[from] item: Leftovers
+|upkeep
+|turn|4
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|move|p2a: Tyranitar|Fire Punch|p1a: Pelipper
+|-resisted|p1a: Pelipper
+|-damage|p1a: Pelipper|93/100
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Tyranitar|198/404|[from] item: Leftovers
+|upkeep
+|turn|5
+|switch|p1a: Seismitoad|Seismitoad, M|100/100
+|move|p2a: Tyranitar|Stone Edge|p1a: Seismitoad
+|-resisted|p1a: Seismitoad
+|-damage|p1a: Seismitoad|64/100
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Tyranitar|223/404|[from] item: Leftovers
+|upkeep
+|turn|6
+|switch|p2a: Kartana|Kartana|259/259
+|-damage|p2a: Kartana|243/259|[from] Stealth Rock
+|move|p1a: Seismitoad|Weather Ball|p2a: Kartana
+|-resisted|p2a: Kartana
+|-damage|p2a: Kartana|0 fnt
+|faint|p2a: Kartana
+|-damage|p1a: Seismitoad|54/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Weavile|Weavile, F|281/281
+|-damage|p2a: Weavile|211/281|[from] Stealth Rock
+|-ability|p2a: Weavile|Pressure
+|turn|7
+|move|p1a: Seismitoad|Weather Ball|p2a: Weavile
+|-damage|p2a: Weavile|0 fnt
+|faint|p2a: Weavile
+|-damage|p1a: Seismitoad|44/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|319/319
+|-damage|p2a: Landorus|280/319|[from] Stealth Rock
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Seismitoad|atk|1
+|turn|8
+|move|p1a: Seismitoad|Weather Ball|p2a: Landorus
+|-supereffective|p2a: Landorus
+|-damage|p2a: Landorus|0 fnt
+|faint|p2a: Landorus
+|-damage|p1a: Seismitoad|34/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Zapdos|Zapdos|352/352
+|turn|9
+|move|p1a: Seismitoad|Weather Ball|p2a: Zapdos
+|-damage|p2a: Zapdos|24/352
+|-damage|p1a: Seismitoad|24/100|[from] item: Life Orb
+|move|p2a: Zapdos|Hurricane|p1a: Seismitoad
+|-damage|p1a: Seismitoad|0 fnt
+|faint|p1a: Seismitoad
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p1a: Zapdos|Zapdos|100/100
+|turn|10
+|switch|p2a: Tyranitar|Tyranitar, M|223/404
+|-damage|p2a: Tyranitar|173/404|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|move|p1a: Zapdos|Thunder|p2a: Tyranitar
+|-damage|p2a: Tyranitar|34/404
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Zapdos|94/100|[from] Sandstorm
+|-heal|p2a: Tyranitar|59/404|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p1a: Ferrothorn|Ferrothorn, F|30/100
+|move|p2a: Tyranitar|Stone Edge|p1a: Ferrothorn|[miss]
+|-miss|p2a: Tyranitar|p1a: Ferrothorn
+|-weather|Sandstorm|[upkeep]
+|-heal|p2a: Tyranitar|84/404|[from] item: Leftovers
+|-heal|p1a: Ferrothorn|36/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|switch|p1a: Pelipper|Pelipper, F|93/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|move|p2a: Tyranitar|Fire Punch|p1a: Pelipper
+|-resisted|p1a: Pelipper
+|-damage|p1a: Pelipper|85/100
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Tyranitar|109/404|[from] item: Leftovers
+|upkeep
+|turn|13
+|move|p2a: Tyranitar|Stone Edge|p1a: Pelipper
+|-supereffective|p1a: Pelipper
+|-damage|p1a: Pelipper|0 fnt
+|faint|p1a: Pelipper
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Tyranitar|134/404|[from] item: Leftovers
+|upkeep
+|switch|p1a: Crawdaunt|Crawdaunt, M|100/100
+|turn|14
+|switch|p2a: Melmetal|Melmetal|474/474
+|-damage|p2a: Melmetal|445/474|[from] Stealth Rock
+|move|p1a: Crawdaunt|Liquidation|p2a: Melmetal
+|-damage|p2a: Melmetal|164/474
+|-damage|p1a: Crawdaunt|91/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|15
+|move|p1a: Crawdaunt|Liquidation|p2a: Melmetal
+|-damage|p2a: Melmetal|0 fnt
+|faint|p2a: Melmetal
+|-damage|p1a: Crawdaunt|81/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Zapdos|Zapdos|24/352
+|turn|16
+|move|p1a: Crawdaunt|Aqua Jet|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|-status|p1a: Crawdaunt|par|[from] ability: Static|[of] p2a: Zapdos
+|faint|p2a: Zapdos
+|-damage|p1a: Crawdaunt|71/100 par|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Tyranitar|Tyranitar, M|134/404
+|-damage|p2a: Tyranitar|84/404|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|turn|17
+|cant|p1a: Crawdaunt|par
+|move|p2a: Tyranitar|Stone Edge|p1a: Crawdaunt
+|-damage|p1a: Crawdaunt|0 fnt
+|faint|p1a: Crawdaunt
+|-weather|Sandstorm|[upkeep]
+|-heal|p2a: Tyranitar|109/404|[from] item: Leftovers
+|upkeep
+|switch|p1a: Barraskewda|Barraskewda, F|100/100
+|turn|18
+|move|p1a: Barraskewda|Liquidation|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|0 fnt
+|faint|p2a: Tyranitar
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

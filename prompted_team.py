@@ -71,6 +71,7 @@ def output_team(opponent_meta = None , context=None):
         print('USING OPPONENT META')
         prompt = create_prompt_opponent(opponent_meta,metadata)
         
+    # print(prompt)
 
     api_key = 'sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7'  # Your OpenAI API key
     response = call_chatgpt_api(prompt, api_key)
