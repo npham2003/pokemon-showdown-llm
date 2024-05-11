@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-138</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-138<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-138|init|battle
+|title|divyansh7877 vs. SimpleHeuristics 1
+|j|☆divyansh7877
+|j|☆SimpleHeuristics 1
+|gametype|singles
+|player|p1|divyansh7877|170|
+|player|p2|SimpleHeuristics 1|1|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Dragapult, M|
+|poke|p1|Tyranitar, M|
+|poke|p1|Ferrothorn, M|
+|poke|p1|Rotom-Wash|
+|poke|p1|Toxapex, F|
+|poke|p1|Clefable, M|
+|poke|p2|Rillaboom, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Blaziken, M|
+|poke|p2|Melmetal|
+|poke|p2|Garchomp, F|
+|poke|p2|Slowbro, F|
+|teampreview
+|start
+|switch|p1a: Clefable|Clefable, M|363/363
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|turn|1
+|move|p2a: Garchomp|Earthquake|p1a: Clefable
+|-damage|p1a: Clefable|165/363
+|move|p1a: Clefable|Moonblast|p2a: Garchomp
+|-supereffective|p2a: Garchomp
+|-damage|p2a: Garchomp|23/100
+|-heal|p2a: Garchomp|30/100|[from] item: Leftovers
+|upkeep
+|turn|2
+|move|p2a: Garchomp|Earthquake|p1a: Clefable
+|-damage|p1a: Clefable|0 fnt
+|faint|p1a: Clefable
+|-heal|p2a: Garchomp|36/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Dragapult|Dragapult, M|286/286
+|turn|3
+|move|p1a: Dragapult|Draco Meteor|p2a: Garchomp
+|-supereffective|p2a: Garchomp
+|-damage|p2a: Garchomp|0 fnt
+|-unboost|p1a: Dragapult|spa|2
+|faint|p2a: Garchomp
+|upkeep
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|turn|4
+|switch|p1a: Rotom|Rotom-Wash|304/304
+|move|p2a: Tornadus|Knock Off|p1a: Rotom
+|-damage|p1a: Rotom|243/304
+|-enditem|p1a: Rotom|Leftovers|[from] move: Knock Off|[of] p2a: Tornadus
+|upkeep
+|turn|5
+|move|p2a: Tornadus|U-turn|p1a: Rotom
+|-damage|p1a: Rotom|194/304
+|switch|p2a: Rillaboom|Rillaboom, F|100/100|[from] U-turn
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p2a: Rillaboom
+|move|p1a: Rotom|Volt Switch|p2a: Rillaboom
+|-resisted|p2a: Rillaboom
+|-damage|p2a: Rillaboom|85/100
+|switch|p1a: Tyranitar|Tyranitar, M|404/404|[from] Volt Switch
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Rillaboom|79/100|[from] Sandstorm
+|-heal|p2a: Rillaboom|85/100|[from] Grassy Terrain
+|-heal|p2a: Rillaboom|91/100|[from] item: Leftovers
+|upkeep
+|turn|6
+|move|p2a: Rillaboom|Drain Punch|p1a: Tyranitar
+|-supereffective|p1a: Tyranitar
+|-damage|p1a: Tyranitar|76/404
+|-heal|p2a: Rillaboom|100/100|[from] drain|[of] p1a: Tyranitar
+|move|p1a: Tyranitar|Fire Punch|p2a: Rillaboom
+|-supereffective|p2a: Rillaboom
+|-damage|p2a: Rillaboom|33/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Rillaboom|27/100|[from] Sandstorm
+|-heal|p2a: Rillaboom|33/100|[from] Grassy Terrain
+|-heal|p2a: Rillaboom|40/100|[from] item: Leftovers
+|-heal|p1a: Tyranitar|101/404|[from] Grassy Terrain
+|upkeep
+|turn|7
+|move|p2a: Rillaboom|Drain Punch|p1a: Tyranitar
+|-supereffective|p1a: Tyranitar
+|-damage|p1a: Tyranitar|0 fnt
+|-heal|p2a: Rillaboom|52/100|[from] drain|[of] p1a: Tyranitar
+|faint|p1a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Rillaboom|46/100|[from] Sandstorm
+|-heal|p2a: Rillaboom|52/100|[from] Grassy Terrain
+|-heal|p2a: Rillaboom|59/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Dragapult|Dragapult, M|286/286
+|turn|8
+|move|p1a: Dragapult|Fire Blast|p2a: Rillaboom
+|-supereffective|p2a: Rillaboom
+|-damage|p2a: Rillaboom|0 fnt
+|faint|p2a: Rillaboom
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Dragapult|269/286|[from] Sandstorm
+|-heal|p1a: Dragapult|286/286|[from] Grassy Terrain
+|upkeep
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|turn|9
+|move|p1a: Dragapult|Fire Blast|p2a: Tornadus
+|-damage|p2a: Tornadus|53/100
+|move|p2a: Tornadus|Knock Off|p1a: Dragapult
+|-supereffective|p1a: Dragapult
+|-damage|p1a: Dragapult|104/286
+|-enditem|p1a: Dragapult|Choice Specs|[from] move: Knock Off|[of] p2a: Tornadus
+|-weather|none
+|-heal|p1a: Dragapult|121/286|[from] Grassy Terrain
+|-fieldend|move: Grassy Terrain
+|upkeep
+|turn|10
+|move|p1a: Dragapult|Draco Meteor|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|-unboost|p1a: Dragapult|spa|2
+|faint|p2a: Tornadus
+|upkeep
+|switch|p2a: Melmetal|Melmetal|100/100
+|turn|11
+|move|p1a: Dragapult|Fire Blast|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|73/100
+|move|p2a: Melmetal|Double Iron Bash|p1a: Dragapult
+|-damage|p1a: Dragapult|0 fnt
+|faint|p1a: Dragapult
+|-hitcount|p1: Dragapult|1
+|-heal|p2a: Melmetal|79/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Rotom|Rotom-Wash|194/304
+|turn|12
+|move|p1a: Rotom|Hydro Pump|p2a: Melmetal
+|-damage|p2a: Melmetal|46/100
+|move|p2a: Melmetal|Superpower|p1a: Rotom
+|-damage|p1a: Rotom|62/304
+|-unboost|p2a: Melmetal|atk|1
+|-unboost|p2a: Melmetal|def|1
+|-heal|p2a: Melmetal|52/100|[from] item: Leftovers
+|upkeep
+|turn|13
+|move|p1a: Rotom|Hydro Pump|p2a: Melmetal
+|-damage|p2a: Melmetal|20/100
+|move|p2a: Melmetal|Superpower|p1a: Rotom
+|-damage|p1a: Rotom|0 fnt
+|-unboost|p2a: Melmetal|atk|1
+|-unboost|p2a: Melmetal|def|1
+|faint|p1a: Rotom
+|-heal|p2a: Melmetal|27/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Toxapex|Toxapex, F|304/304
+|turn|14
+|move|p2a: Melmetal|Thunder Punch|p1a: Toxapex
+|-supereffective|p1a: Toxapex
+|-damage|p1a: Toxapex|246/304
+|move|p1a: Toxapex|Scald|p2a: Melmetal
+|-damage|p2a: Melmetal|11/100
+|-heal|p2a: Melmetal|17/100|[from] item: Leftovers
+|-heal|p1a: Toxapex|265/304|[from] item: Black Sludge
+|upkeep
+|turn|15
+|move|p2a: Melmetal|Thunder Punch|p1a: Toxapex
+|-supereffective|p1a: Toxapex
+|-damage|p1a: Toxapex|199/304
+|move|p1a: Toxapex|Scald|p2a: Melmetal
+|-damage|p2a: Melmetal|2/100
+|-heal|p2a: Melmetal|8/100|[from] item: Leftovers
+|-heal|p1a: Toxapex|218/304|[from] item: Black Sludge
+|upkeep
+|turn|16
+|move|p2a: Melmetal|Thunder Punch|p1a: Toxapex
+|-supereffective|p1a: Toxapex
+|-damage|p1a: Toxapex|150/304
+|move|p1a: Toxapex|Scald|p2a: Melmetal
+|-damage|p2a: Melmetal|0 fnt
+|faint|p2a: Melmetal
+|-heal|p1a: Toxapex|169/304|[from] item: Black Sludge
+|upkeep
+|switch|p2a: Slowbro|Slowbro, F|100/100
+|turn|17
+|switch|p1a: Ferrothorn|Ferrothorn, M|352/352
+|move|p2a: Slowbro|Future Sight|p1a: Ferrothorn
+|-start|p2a: Slowbro|move: Future Sight
+|upkeep
+|turn|18
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|move|p1a: Ferrothorn|Power Whip|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|50/100
+|-damage|p1a: Ferrothorn|294/352|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|-heal|p1a: Ferrothorn|316/352|[from] item: Leftovers
+|upkeep
+|turn|19
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|move|p1a: Ferrothorn|Power Whip|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|0 fnt
+|-damage|p1a: Ferrothorn|258/352|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|faint|p2a: Slowbro
+|-end|p1a: Ferrothorn|move: Future Sight
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|198/352
+|-heal|p1a: Ferrothorn|220/352|[from] item: Leftovers
+|upkeep
+|switch|p2a: Blaziken|Blaziken, M|100/100
+|turn|20
+|switch|p1a: Toxapex|Toxapex, F|270/304
+|move|p2a: Blaziken|Swords Dance|p2a: Blaziken
+|-boost|p2a: Blaziken|atk|2
+|-heal|p1a: Toxapex|289/304|[from] item: Black Sludge
+|-ability|p2a: Blaziken|Speed Boost|boost
+|-boost|p2a: Blaziken|spe|1
+|upkeep
+|turn|21
+|move|p2a: Blaziken|Close Combat|p1a: Toxapex
+|-resisted|p1a: Toxapex
+|-damage|p1a: Toxapex|168/304
+|-unboost|p2a: Blaziken|def|1
+|-unboost|p2a: Blaziken|spd|1
+|move|p1a: Toxapex|Scald|p2a: Blaziken
+|-supereffective|p2a: Blaziken
+|-damage|p2a: Blaziken|29/100
+|-heal|p2a: Blaziken|36/100|[from] item: Leftovers
+|-heal|p1a: Toxapex|187/304|[from] item: Black Sludge
+|-ability|p2a: Blaziken|Speed Boost|boost
+|-boost|p2a: Blaziken|spe|1
+|upkeep
+|turn|22
+|move|p2a: Blaziken|Close Combat|p1a: Toxapex
+|-resisted|p1a: Toxapex
+|-damage|p1a: Toxapex|68/304
+|-unboost|p2a: Blaziken|def|1
+|-unboost|p2a: Blaziken|spd|1
+|move|p1a: Toxapex|Scald|p2a: Blaziken
+|-supereffective|p2a: Blaziken
+|-damage|p2a: Blaziken|0 fnt
+|faint|p2a: Blaziken
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
