@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--backend", type=str, default="gpt-4-turbo", choices=["gpt-3.5-turbo-0125", "gpt-4-1106-preview", "gpt-4-0125-preview"])
 parser.add_argument("--temperature", type=float, default=0.8)
 parser.add_argument("--prompt_algo", default="io", choices=["io", "sc", "cot", "tot"])
-parser.add_argument("--log_dir", type=str, default="./battle_log/pokellmon_vs_bot/with_context_gpt_4_turbo_5_9/")
+parser.add_argument("--log_dir", type=str, default="./battle_log_test/pokellmon_vs_bot/with_context_gpt_4_turbo_5_9/")
 args = parser.parse_args()
 
 
@@ -138,7 +138,7 @@ IVs: 0 Atk / 0 Spe
 
 
 
-    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team1)
+    heuristic_player = SimpleHeuristicsPlayer(battle_format="gen8ou",team=team2)
     opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('SimpleHeuristics 1')
     os.makedirs(args.log_dir, exist_ok=True)
 

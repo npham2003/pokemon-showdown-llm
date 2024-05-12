@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-164</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-164<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-164|init|battle
+|title|SimpleHeuristics 1 vs. divyansh7877
+|j|☆SimpleHeuristics 1
+|j|☆divyansh7877
+|gametype|singles
+|player|p1|SimpleHeuristics 1|102|
+|player|p2|divyansh7877|169|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Urshifu-*, M|
+|poke|p1|Heatran, F|
+|poke|p1|Rotom-Wash|
+|poke|p1|Landorus-Therian, M|
+|poke|p1|Tapu Lele|
+|poke|p1|Kartana|
+|poke|p2|Weavile, M|
+|poke|p2|Landorus-Therian, M|
+|poke|p2|Zapdos|
+|poke|p2|Melmetal|
+|poke|p2|Tyranitar, M|
+|poke|p2|Skarmory, M|
+|teampreview
+|start
+|switch|p1a: Heatran|Heatran, F|100/100
+|switch|p2a: Melmetal|Melmetal|474/474
+|-item|p1a: Heatran|Air Balloon
+|turn|1
+|move|p1a: Heatran|Magma Storm|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|130/474
+|-activate|p2a: Melmetal|move: Magma Storm|[of] p1a: Heatran
+|move|p2a: Melmetal|Earthquake|p1a: Heatran
+|-immune|p1a: Heatran
+|-damage|p2a: Melmetal|71/474|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|2
+|move|p1a: Heatran|Magma Storm|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|0 fnt
+|faint|p2a: Melmetal
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|319/319
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Heatran|atk|1
+|turn|3
+|switch|p1a: Kartana|Kartana, shiny|100/100
+|move|p2a: Landorus|Earthquake|p1a: Kartana
+|-damage|p1a: Kartana|38/100
+|upkeep
+|turn|4
+|move|p2a: Landorus|Earthquake|p1a: Kartana
+|-damage|p1a: Kartana|0 fnt
+|faint|p1a: Kartana
+|upkeep
+|switch|p1a: Tapu Lele|Tapu Lele|100/100
+|-fieldstart|move: Psychic Terrain|[from] ability: Psychic Surge|[of] p1a: Tapu Lele
+|turn|5
+|switch|p2a: Weavile|Weavile, M|282/282
+|-ability|p2a: Weavile|Pressure
+|move|p1a: Tapu Lele|Future Sight|p2a: Weavile
+|-start|p1a: Tapu Lele|move: Future Sight
+|upkeep
+|turn|6
+|move|p1a: Tapu Lele|Future Sight||[still]
+|-fail|p1a: Tapu Lele
+|move|p2a: Weavile|Knock Off|p1a: Tapu Lele
+|-damage|p1a: Tapu Lele|19/100
+|-enditem|p1a: Tapu Lele|Choice Scarf|[from] move: Knock Off|[of] p2a: Weavile
+|-damage|p2a: Weavile|254/282|[from] item: Life Orb
+|upkeep
+|turn|7
+|move|p2a: Weavile|Knock Off|p1a: Tapu Lele
+|-damage|p1a: Tapu Lele|0 fnt
+|faint|p1a: Tapu Lele
+|-damage|p2a: Weavile|226/282|[from] item: Life Orb
+|-end|p2a: Weavile|move: Future Sight
+|-immune|p2a: Weavile
+|upkeep
+|switch|p1a: Urshifu|Urshifu-Rapid-Strike, M|100/100
+|turn|8
+|switch|p2a: Zapdos|Zapdos|383/383
+|move|p1a: Urshifu|Close Combat|p2a: Zapdos
+|-resisted|p2a: Zapdos
+|-damage|p2a: Zapdos|199/383
+|-unboost|p1a: Urshifu|def|1
+|-unboost|p1a: Urshifu|spd|1
+|upkeep
+|turn|9
+|move|p1a: Urshifu|Close Combat|p2a: Zapdos
+|-resisted|p2a: Zapdos
+|-damage|p2a: Zapdos|1/383
+|-unboost|p1a: Urshifu|def|1
+|-unboost|p1a: Urshifu|spd|1
+|-status|p1a: Urshifu|par|[from] ability: Static|[of] p2a: Zapdos
+|move|p2a: Zapdos|Hurricane|p1a: Urshifu
+|-supereffective|p1a: Urshifu
+|-damage|p1a: Urshifu|0 fnt
+|faint|p1a: Urshifu
+|-fieldend|move: Psychic Terrain
+|upkeep
+|switch|p1a: Heatran|Heatran, F|100/100
+|-item|p1a: Heatran|Air Balloon
+|turn|10
+|switch|p2a: Landorus|Landorus-Therian, M|319/319
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Heatran|atk|1
+|move|p1a: Heatran|Magma Storm|p2a: Landorus
+|-damage|p2a: Landorus|118/319
+|-activate|p2a: Landorus|move: Magma Storm|[of] p1a: Heatran
+|-damage|p2a: Landorus|79/319|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|11
+|switch|p1a: Landorus|Landorus-Therian, M|100/100
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Landorus|atk|1
+|move|p2a: Landorus|Earthquake|p1a: Landorus
+|-immune|p1a: Landorus
+|-end|p2a: Landorus|Magma Storm|[partiallytrapped]|[silent]
+|upkeep
+|turn|12
+|switch|p2a: Weavile|Weavile, M|226/282
+|-ability|p2a: Weavile|Pressure
+|move|p1a: Landorus|Knock Off|p2a: Weavile
+|-resisted|p2a: Weavile
+|-damage|p2a: Weavile|155/282
+|-enditem|p2a: Weavile|Life Orb|[from] move: Knock Off|[of] p1a: Landorus
+|upkeep
+|turn|13
+|switch|p1a: Heatran|Heatran, F|100/100
+|-item|p1a: Heatran|Air Balloon
+|move|p2a: Weavile|Triple Axel|p1a: Heatran
+|-resisted|p1a: Heatran
+|-damage|p1a: Heatran|98/100
+|-enditem|p1a: Heatran|Air Balloon
+|-resisted|p1a: Heatran
+|-damage|p1a: Heatran|94/100
+|-resisted|p1a: Heatran
+|-damage|p1a: Heatran|87/100
+|-hitcount|p1a: Heatran|3
+|upkeep
+|turn|14
+|switch|p2a: Landorus|Landorus-Therian, M|79/319
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Heatran|atk|1
+|move|p1a: Heatran|Magma Storm|p2a: Landorus
+|-damage|p2a: Landorus|0 fnt
+|faint|p2a: Landorus
+|upkeep
+|switch|p2a: Tyranitar|Tyranitar, M|341/341
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|turn|15
+|move|p1a: Heatran|Earth Power|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-crit|p2a: Tyranitar
+|-damage|p2a: Tyranitar|127/341
+|move|p2a: Tyranitar|Superpower|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|0 fnt
+|-unboost|p2a: Tyranitar|atk|1
+|-unboost|p2a: Tyranitar|def|1
+|faint|p1a: Heatran
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|switch|p1a: Landorus|Landorus-Therian, M|100/100
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Tyranitar|atk|1
+|turn|16
+|switch|p2a: Weavile|Weavile, M|155/282
+|-ability|p2a: Weavile|Pressure
+|move|p1a: Landorus|Earthquake|p2a: Weavile
+|-damage|p2a: Weavile|0 fnt
+|faint|p2a: Weavile
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|switch|p2a: Skarmory|Skarmory, M|334/334
+|turn|17
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|273/334
+|-enditem|p2a: Skarmory|Leftovers|[from] move: Knock Off|[of] p1a: Landorus
+|move|p2a: Skarmory|Iron Defense|p2a: Skarmory
+|-boost|p2a: Skarmory|def|2
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|18
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|251/334
+|move|p2a: Skarmory|Roost|p2a: Skarmory
+|-heal|p2a: Skarmory|334/334
+|-singleturn|p2a: Skarmory|move: Roost
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|19
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|313/334
+|move|p2a: Skarmory|Spikes|p1a: Landorus
+|-sidestart|p1: SimpleHeuristics 1|Spikes
+|-weather|none
+|upkeep
+|turn|20
+|move|p1a: Landorus|Defog|p2a: Skarmory
+|-unboost|p2a: Skarmory|evasion|1
+|-sideend|p1: SimpleHeuristics 1|Spikes|[from] move: Defog|[of] p1a: Landorus
+|move|p2a: Skarmory|Iron Defense|p2a: Skarmory
+|-boost|p2a: Skarmory|def|2
+|upkeep
+|turn|21
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|298/334
+|move|p2a: Skarmory|Body Press|p1a: Landorus
+|-resisted|p1a: Landorus
+|-damage|p1a: Landorus|51/100
+|-heal|p1a: Landorus|57/100|[from] item: Leftovers
+|upkeep
+|turn|22
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|284/334
+|move|p2a: Skarmory|Iron Defense|p2a: Skarmory
+|-boost|p2a: Skarmory|def|2
+|-heal|p1a: Landorus|63/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|273/334
+|move|p2a: Skarmory|Body Press|p1a: Landorus
+|-resisted|p1a: Landorus
+|-damage|p1a: Landorus|5/100
+|-heal|p1a: Landorus|12/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|move|p1a: Landorus|Knock Off|p2a: Skarmory
+|-damage|p2a: Skarmory|262/334
+|move|p2a: Skarmory|Body Press|p1a: Landorus
+|-resisted|p1a: Landorus
+|-damage|p1a: Landorus|0 fnt
+|faint|p1a: Landorus
+|upkeep
+|switch|p1a: Rotom|Rotom-Wash, shiny|100/100
+|turn|25
+|move|p1a: Rotom|Volt Switch|p2a: Skarmory
+|-supereffective|p2a: Skarmory
+|-damage|p2a: Skarmory|38/334
+|move|p2a: Skarmory|Roost|p2a: Skarmory
+|-heal|p2a: Skarmory|205/334
+|-singleturn|p2a: Skarmory|move: Roost
+|upkeep
+|turn|26
+|move|p1a: Rotom|Volt Switch|p2a: Skarmory
+|-supereffective|p2a: Skarmory
+|-damage|p2a: Skarmory|0 fnt
+|faint|p2a: Skarmory
+|upkeep
+|switch|p2a: Tyranitar|Tyranitar, M|127/341
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|turn|27
+|move|p2a: Tyranitar|Stone Edge|p1a: Rotom|[miss]
+|-miss|p2a: Tyranitar|p1a: Rotom
+|move|p1a: Rotom|Hydro Pump|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|0 fnt
+|faint|p2a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rotom|94/100|[from] Sandstorm
+|-heal|p1a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|switch|p2a: Zapdos|Zapdos|1/383
+|turn|28
+|move|p2a: Zapdos|Roost|p2a: Zapdos
+|-heal|p2a: Zapdos|193/383
+|-singleturn|p2a: Zapdos|move: Roost
+|move|p1a: Rotom|Hydro Pump|p2a: Zapdos
+|-damage|p2a: Zapdos|40/383
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Zapdos|17/383|[from] Sandstorm
+|-damage|p1a: Rotom|94/100|[from] Sandstorm
+|-heal|p1a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|29
+|move|p2a: Zapdos|Volt Switch|p1a: Rotom
+|-damage|p1a: Rotom|73/100
+|move|p1a: Rotom|Hydro Pump|p2a: Zapdos
+|-crit|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

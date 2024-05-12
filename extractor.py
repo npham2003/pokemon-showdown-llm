@@ -2,7 +2,7 @@ import re
 import os
 import pandas as pd
 
-PLAYER_NAME = 'literally an ai'
+PLAYER_NAME = 'divyansh7877'
 
 def metric_calculator(f,filename):
     '''
@@ -92,7 +92,7 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = 'battle_log_with_context\pokellmon_vs_invited_player'
+filepath = 'battle_log\pokellmon_vs_invited_player'
 
 for file in os.listdir(filepath):
 
@@ -105,7 +105,7 @@ for file in os.listdir(filepath):
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_with_context_nick.csv',index=None)
+df.to_csv('battle_metrics_opponent_and_meta_context_div.csv',index=None)
 
 lost= 0
 avg_hp = 0

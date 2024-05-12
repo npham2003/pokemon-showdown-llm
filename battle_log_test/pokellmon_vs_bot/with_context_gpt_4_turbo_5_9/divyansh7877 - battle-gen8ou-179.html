@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-179</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-179<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-179|init|battle
+|title|SimpleHeuristics 1 vs. divyansh7877
+|j|☆SimpleHeuristics 1
+|j|☆divyansh7877
+|gametype|singles
+|player|p1|SimpleHeuristics 1|102|
+|player|p2|divyansh7877|1|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Rillaboom, F|
+|poke|p1|Tornadus-Therian, M|
+|poke|p1|Blaziken, F|
+|poke|p1|Melmetal|
+|poke|p1|Garchomp, M|
+|poke|p1|Slowbro, M|
+|poke|p2|Landorus-Therian, M|
+|poke|p2|Weavile, F|
+|poke|p2|Zapdos|
+|poke|p2|Melmetal|
+|poke|p2|Tyranitar, M|
+|poke|p2|Kartana|
+|teampreview
+|start
+|switch|p1a: Slowbro|Slowbro, M|100/100
+|switch|p2a: Kartana|Kartana|259/259
+|turn|1
+|move|p2a: Kartana|Leaf Blade|p1a: Slowbro
+|-supereffective|p1a: Slowbro
+|-damage|p1a: Slowbro|32/100
+|-damage|p2a: Kartana|216/259|[from] item: Rocky Helmet|[of] p1a: Slowbro
+|move|p1a: Slowbro|Future Sight|p2a: Kartana
+|-start|p1a: Slowbro|move: Future Sight
+|upkeep
+|turn|2
+|move|p2a: Kartana|Leaf Blade|p1a: Slowbro
+|-supereffective|p1a: Slowbro
+|-damage|p1a: Slowbro|0 fnt
+|-damage|p2a: Kartana|173/259|[from] item: Rocky Helmet|[of] p1a: Slowbro
+|faint|p1a: Slowbro
+|-ability|p2a: Kartana|Beast Boost|boost
+|-boost|p2a: Kartana|atk|1
+|upkeep
+|switch|p1a: Blaziken|Blaziken, F|100/100
+|turn|3
+|switch|p2a: Zapdos|Zapdos|384/384
+|move|p1a: Blaziken|Swords Dance|p1a: Blaziken
+|-boost|p1a: Blaziken|atk|2
+|-end|p2a: Zapdos|move: Future Sight
+|-damage|p2a: Zapdos|227/384
+|-ability|p1a: Blaziken|Speed Boost|boost
+|-boost|p1a: Blaziken|spe|1
+|upkeep
+|turn|4
+|move|p1a: Blaziken|Flare Blitz|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|-status|p1a: Blaziken|par|[from] ability: Static|[of] p2a: Zapdos
+|faint|p2a: Zapdos
+|-damage|p1a: Blaziken|78/100 par|[from] Recoil
+|-heal|p1a: Blaziken|84/100 par|[from] item: Leftovers
+|-ability|p1a: Blaziken|Speed Boost|boost
+|-boost|p1a: Blaziken|spe|1
+|upkeep
+|switch|p2a: Melmetal|Melmetal|474/474
+|turn|5
+|move|p1a: Blaziken|Close Combat|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|0 fnt
+|-unboost|p1a: Blaziken|def|1
+|-unboost|p1a: Blaziken|spd|1
+|faint|p2a: Melmetal
+|-heal|p1a: Blaziken|91/100 par|[from] item: Leftovers
+|-ability|p1a: Blaziken|Speed Boost|boost
+|-boost|p1a: Blaziken|spe|1
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|288/288
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Blaziken|atk|1
+|turn|6
+|move|p2a: Landorus|Earthquake|p1a: Blaziken
+|-supereffective|p1a: Blaziken
+|-damage|p1a: Blaziken|0 fnt
+|faint|p1a: Blaziken
+|upkeep
+|switch|p1a: Tornadus|Tornadus-Therian, M|100/100
+|turn|7
+|switch|p2a: Weavile|Weavile, F|251/251
+|-ability|p2a: Weavile|Pressure
+|move|p1a: Tornadus|Heat Wave|p2a: Weavile
+|-supereffective|p2a: Weavile
+|-damage|p2a: Weavile|67/251
+|upkeep
+|turn|8
+|move|p2a: Weavile|Triple Axel|p1a: Tornadus
+|-supereffective|p1a: Tornadus
+|-damage|p1a: Tornadus|73/100
+|-hitcount|p1a: Tornadus|1
+|-damage|p2a: Weavile|42/251|[from] item: Life Orb
+|move|p1a: Tornadus|Heat Wave|p2a: Weavile
+|-supereffective|p2a: Weavile
+|-crit|p2a: Weavile
+|-damage|p2a: Weavile|0 fnt
+|faint|p2a: Weavile
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|288/288
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Tornadus|atk|1
+|turn|9
+|move|p2a: Landorus|Stone Edge|p1a: Tornadus
+|-supereffective|p1a: Tornadus
+|-damage|p1a: Tornadus|0 fnt
+|faint|p1a: Tornadus
+|upkeep
+|switch|p1a: Garchomp|Garchomp, M|100/100
+|turn|10
+|switch|p2a: Kartana|Kartana|173/259
+|move|p1a: Garchomp|Stealth Rock|p2a: Kartana
+|-sidestart|p2: divyansh7877|move: Stealth Rock
+|upkeep
+|turn|11
+|move|p2a: Kartana|Leaf Blade|p1a: Garchomp
+|-damage|p1a: Garchomp|46/100
+|-damage|p2a: Kartana|141/259|[from] ability: Rough Skin|[of] p1a: Garchomp
+|move|p1a: Garchomp|Earthquake|p2a: Kartana
+|-damage|p2a: Kartana|17/259
+|-heal|p1a: Garchomp|52/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|move|p2a: Kartana|Leaf Blade|p1a: Garchomp
+|-crit|p1a: Garchomp
+|-damage|p1a: Garchomp|0 fnt
+|-damage|p2a: Kartana|0 fnt|[from] ability: Rough Skin|[of] p1a: Garchomp
+|faint|p1a: Garchomp
+|faint|p2a: Kartana
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|288/288
+|switch|p1a: Melmetal|Melmetal|100/100
+|-damage|p2a: Landorus|252/288|[from] Stealth Rock
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Melmetal|atk|1
+|turn|13
+|move|p2a: Landorus|Earthquake|p1a: Melmetal
+|-supereffective|p1a: Melmetal
+|-damage|p1a: Melmetal|36/100
+|move|p1a: Melmetal|Double Iron Bash|p2a: Landorus
+|-damage|p2a: Landorus|153/288
+|-damage|p2a: Landorus|62/288
+|-hitcount|p2a: Landorus|2
+|-heal|p1a: Melmetal|42/100|[from] item: Leftovers
+|upkeep
+|turn|14
+|move|p2a: Landorus|Earthquake|p1a: Melmetal
+|-supereffective|p1a: Melmetal
+|-damage|p1a: Melmetal|0 fnt
+|faint|p1a: Melmetal
+|upkeep
+|switch|p1a: Rillaboom|Rillaboom, F|100/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p1a: Rillaboom
+|turn|15
+|switch|p2a: Tyranitar|Tyranitar, M|386/386
+|-damage|p2a: Tyranitar|338/386|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|move|p1a: Rillaboom|Grassy Glide|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|2/386
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rillaboom|94/100|[from] Sandstorm
+|-heal|p1a: Rillaboom|100/100|[from] Grassy Terrain
+|-heal|p2a: Tyranitar|26/386|[from] Grassy Terrain
+|upkeep
+|turn|16
+|move|p1a: Rillaboom|Swords Dance|p1a: Rillaboom
+|-boost|p1a: Rillaboom|atk|2
+|move|p2a: Tyranitar|Fire Punch|p1a: Rillaboom
+|-supereffective|p1a: Rillaboom
+|-damage|p1a: Rillaboom|12/100
+|-status|p1a: Rillaboom|brn
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rillaboom|6/100 brn|[from] Sandstorm
+|-heal|p1a: Rillaboom|12/100 brn|[from] Grassy Terrain
+|-heal|p1a: Rillaboom|19/100 brn|[from] item: Leftovers
+|-heal|p2a: Tyranitar|50/386|[from] Grassy Terrain
+|-damage|p1a: Rillaboom|12/100 brn|[from] brn
+|upkeep
+|turn|17
+|move|p1a: Rillaboom|Drain Punch|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|0 fnt
+|-heal|p1a: Rillaboom|19/100 brn|[from] drain|[of] p2a: Tyranitar
+|faint|p2a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rillaboom|12/100 brn|[from] Sandstorm
+|-heal|p1a: Rillaboom|19/100 brn|[from] Grassy Terrain
+|-heal|p1a: Rillaboom|25/100 brn|[from] item: Leftovers
+|-damage|p1a: Rillaboom|19/100 brn|[from] brn
+|upkeep
+|switch|p2a: Landorus|Landorus-Therian, M|62/288
+|-damage|p2a: Landorus|26/288|[from] Stealth Rock
+|-ability|p2a: Landorus|Intimidate|boost
+|-unboost|p1a: Rillaboom|atk|1
+|turn|18
+|move|p1a: Rillaboom|Grassy Glide|p2a: Landorus
+|-damage|p2a: Landorus|0 fnt
+|faint|p2a: Landorus
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
