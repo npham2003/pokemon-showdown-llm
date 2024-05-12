@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-145</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-145<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-145|init|battle
+|title|divyansh7877 vs. SimpleHeuristics 1
+|j|☆divyansh7877
+|j|☆SimpleHeuristics 1
+|gametype|singles
+|player|p1|divyansh7877|170|
+|player|p2|SimpleHeuristics 1|1|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Weavile, F|
+|poke|p1|Skarmory, M|
+|poke|p1|Zapdos|
+|poke|p1|Melmetal|
+|poke|p1|Tyranitar, F|
+|poke|p1|Mew|
+|poke|p2|Rillaboom, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Blaziken, F|
+|poke|p2|Melmetal|
+|poke|p2|Garchomp, F|
+|poke|p2|Slowbro, M|
+|teampreview
+|start
+|switch|p1a: Tyranitar|Tyranitar, F|404/404
+|switch|p2a: Rillaboom|Rillaboom, F|100/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p2a: Rillaboom
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|turn|1
+|switch|p1a: Weavile|Weavile, F|250/250
+|-ability|p1a: Weavile|Pressure
+|move|p2a: Rillaboom|Swords Dance|p2a: Rillaboom
+|-boost|p2a: Rillaboom|atk|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Weavile|235/250|[from] Sandstorm
+|-damage|p2a: Rillaboom|94/100|[from] Sandstorm
+|-heal|p1a: Weavile|250/250|[from] Grassy Terrain
+|-heal|p2a: Rillaboom|100/100|[from] Grassy Terrain
+|upkeep
+|turn|2
+|move|p1a: Weavile|Triple Axel|p2a: Rillaboom
+|-supereffective|p2a: Rillaboom
+|-damage|p2a: Rillaboom|81/100
+|-supereffective|p2a: Rillaboom
+|-damage|p2a: Rillaboom|47/100
+|-supereffective|p2a: Rillaboom
+|-damage|p2a: Rillaboom|0 fnt
+|faint|p2a: Rillaboom
+|-hitcount|p2: Rillaboom|3
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Weavile|235/250|[from] Sandstorm
+|-heal|p1a: Weavile|250/250|[from] Grassy Terrain
+|upkeep
+|switch|p2a: Blaziken|Blaziken, F|100/100
+|turn|3
+|switch|p1a: Zapdos|Zapdos|290/290
+|move|p2a: Blaziken|Swords Dance|p2a: Blaziken
+|-boost|p2a: Blaziken|atk|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Zapdos|272/290|[from] Sandstorm
+|-damage|p2a: Blaziken|94/100|[from] Sandstorm
+|-heal|p2a: Blaziken|100/100|[from] Grassy Terrain
+|-ability|p2a: Blaziken|Speed Boost|boost
+|-boost|p2a: Blaziken|spe|1
+|upkeep
+|turn|4
+|move|p2a: Blaziken|Flare Blitz|p1a: Zapdos
+|-damage|p1a: Zapdos|0 fnt
+|-status|p2a: Blaziken|par|[from] ability: Static|[of] p1a: Zapdos
+|faint|p1a: Zapdos
+|-damage|p2a: Blaziken|74/100 par|[from] Recoil
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Blaziken|68/100 par|[from] Sandstorm
+|-heal|p2a: Blaziken|74/100 par|[from] Grassy Terrain
+|-heal|p2a: Blaziken|80/100 par|[from] item: Leftovers
+|-ability|p2a: Blaziken|Speed Boost|boost
+|-boost|p2a: Blaziken|spe|1
+|upkeep
+|switch|p1a: Mew|Mew|404/404
+|turn|5
+|switch|p1a: Melmetal|Melmetal|474/474
+|move|p2a: Blaziken|Flare Blitz|p1a: Melmetal
+|-supereffective|p1a: Melmetal
+|-damage|p1a: Melmetal|0 fnt
+|faint|p1a: Melmetal
+|-damage|p2a: Blaziken|34/100 par|[from] Recoil
+|-weather|none
+|-heal|p2a: Blaziken|40/100 par|[from] Grassy Terrain
+|-heal|p2a: Blaziken|46/100 par|[from] item: Leftovers
+|-fieldend|move: Grassy Terrain
+|-ability|p2a: Blaziken|Speed Boost|boost
+|-boost|p2a: Blaziken|spe|1
+|upkeep
+|switch|p1a: Tyranitar|Tyranitar, F|404/404
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|turn|6
+|cant|p2a: Blaziken|par
+|move|p1a: Tyranitar|Earthquake|p2a: Blaziken
+|-supereffective|p2a: Blaziken
+|-damage|p2a: Blaziken|0 fnt
+|faint|p2a: Blaziken
+|-damage|p1a: Tyranitar|364/404|[from] item: Life Orb
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|turn|7
+|switch|p1a: Weavile|Weavile, F|250/250
+|-ability|p1a: Weavile|Pressure
+|move|p2a: Garchomp|Earthquake|p1a: Weavile
+|-damage|p1a: Weavile|30/250
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Weavile|15/250|[from] Sandstorm
+|upkeep
+|turn|8
+|switch|p2a: Melmetal|Melmetal|100/100
+|move|p1a: Weavile|Ice Shard|p2a: Melmetal
+|-resisted|p2a: Melmetal
+|-damage|p2a: Melmetal|95/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Weavile|0 fnt|[from] Sandstorm
+|faint|p1a: Weavile
+|-heal|p2a: Melmetal|100/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Mew|Mew|404/404
+|turn|9
+|move|p1a: Mew|Stealth Rock|p2a: Melmetal
+|-sidestart|p2: SimpleHeuristics 1|move: Stealth Rock
+|move|p2a: Melmetal|Double Iron Bash|p1a: Mew
+|-damage|p1a: Mew|272/404
+|-damage|p1a: Mew|127/404
+|-hitcount|p1a: Mew|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Mew|102/404|[from] Sandstorm
+|-heal|p1a: Mew|127/404|[from] item: Leftovers
+|upkeep
+|turn|10
+|switch|p1a: Skarmory|Skarmory, M|334/334
+|move|p2a: Melmetal|Double Iron Bash|p1a: Skarmory
+|-resisted|p1a: Skarmory
+|-damage|p1a: Skarmory|296/334
+|-damage|p2a: Melmetal|84/100|[from] item: Rocky Helmet|[of] p1a: Skarmory
+|-resisted|p1a: Skarmory
+|-damage|p1a: Skarmory|257/334
+|-damage|p2a: Melmetal|67/100|[from] item: Rocky Helmet|[of] p1a: Skarmory
+|-hitcount|p1a: Skarmory|2
+|-weather|none
+|-heal|p2a: Melmetal|74/100|[from] item: Leftovers
+|upkeep
+|turn|11
+|move|p1a: Skarmory|Body Press|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|32/100
+|move|p2a: Melmetal|Thunder Punch|p1a: Skarmory
+|-supereffective|p1a: Skarmory
+|-damage|p1a: Skarmory|117/334
+|-damage|p2a: Melmetal|15/100|[from] item: Rocky Helmet|[of] p1a: Skarmory
+|-heal|p2a: Melmetal|21/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|move|p1a: Skarmory|Body Press|p2a: Melmetal
+|-supereffective|p2a: Melmetal
+|-damage|p2a: Melmetal|0 fnt
+|faint|p2a: Melmetal
+|upkeep
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|turn|13
+|switch|p1a: Tyranitar|Tyranitar, F|364/404
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|move|p2a: Slowbro|Scald|p1a: Tyranitar
+|-supereffective|p1a: Tyranitar
+|-damage|p1a: Tyranitar|248/404
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Slowbro|82/100|[from] Sandstorm
+|upkeep
+|turn|14
+|move|p1a: Tyranitar|Crunch|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|11/100
+|-damage|p1a: Tyranitar|181/404|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|-damage|p1a: Tyranitar|141/404|[from] item: Life Orb
+|move|p2a: Slowbro|Scald|p1a: Tyranitar
+|-supereffective|p1a: Tyranitar
+|-damage|p1a: Tyranitar|13/404
+|-status|p1a: Tyranitar|brn
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Slowbro|5/100|[from] Sandstorm
+|-damage|p1a: Tyranitar|0 fnt|[from] brn
+|faint|p1a: Tyranitar
+|upkeep
+|switch|p1a: Mew|Mew|127/404
+|turn|15
+|move|p1a: Mew|Taunt|p2a: Slowbro
+|-start|p2a: Slowbro|move: Taunt
+|move|p2a: Slowbro|Scald|p1a: Mew
+|-damage|p1a: Mew|34/404
+|-status|p1a: Mew|brn
+|-activate|p1a: Mew|ability: Synchronize
+|-status|p2a: Slowbro|brn
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Mew|9/404 brn|[from] Sandstorm
+|-damage|p2a: Slowbro|0 fnt|[from] Sandstorm
+|faint|p2a: Slowbro
+|-heal|p1a: Mew|34/404 brn|[from] item: Leftovers
+|-damage|p1a: Mew|9/404 brn|[from] brn
+|upkeep
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|-damage|p2a: Garchomp|94/100|[from] Stealth Rock
+|turn|16
+|move|p1a: Mew|Will-O-Wisp|p2a: Garchomp
+|-status|p2a: Garchomp|brn
+|move|p2a: Garchomp|Earthquake|p1a: Mew
+|-damage|p1a: Mew|0 fnt
+|faint|p1a: Mew
+|-weather|Sandstorm|[upkeep]
+|-heal|p2a: Garchomp|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Garchomp|94/100 brn|[from] brn
+|upkeep
+|switch|p1a: Skarmory|Skarmory, M|117/334
+|turn|17
+|move|p2a: Garchomp|Stealth Rock|p1a: Skarmory
+|-sidestart|p1: divyansh7877|move: Stealth Rock
+|move|p1a: Skarmory|Roost|p1a: Skarmory
+|-heal|p1a: Skarmory|284/334
+|-singleturn|p1a: Skarmory|move: Roost
+|-weather|none
+|-heal|p2a: Garchomp|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Garchomp|94/100 brn|[from] brn
+|upkeep
+|turn|18
+|move|p2a: Garchomp|Stealth Rock||[still]
+|-fail|p2a: Garchomp
+|move|p1a: Skarmory|Iron Defense|p1a: Skarmory
+|-boost|p1a: Skarmory|def|2
+|-heal|p2a: Garchomp|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Garchomp|94/100 brn|[from] brn
+|upkeep
+|turn|19
+|move|p2a: Garchomp|Stealth Rock||[still]
+|-fail|p2a: Garchomp
+|move|p1a: Skarmory|Body Press|p2a: Garchomp
+|-damage|p2a: Garchomp|36/100 brn
+|-damage|p1a: Skarmory|243/334|[from] ability: Rough Skin|[of] p2a: Garchomp
+|-heal|p2a: Garchomp|42/100 brn|[from] item: Leftovers
+|-damage|p2a: Garchomp|36/100 brn|[from] brn
+|upkeep
+|turn|20
+|move|p2a: Garchomp|Stealth Rock||[still]
+|-fail|p2a: Garchomp
+|move|p1a: Skarmory|Body Press|p2a: Garchomp
+|-damage|p2a: Garchomp|0 fnt
+|-damage|p1a: Skarmory|202/334|[from] ability: Rough Skin|[of] p2a: Garchomp
+|faint|p2a: Garchomp
+|upkeep
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|turn|21
+|move|p2a: Tornadus|Heat Wave|p1a: Skarmory
+|-supereffective|p1a: Skarmory
+|-damage|p1a: Skarmory|0 fnt
+|faint|p1a: Skarmory
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
