@@ -19,7 +19,7 @@ def metric_calculator(f,filename):
     pokemons={}
 
     for line in f:
-        if bool(re.search(PLAYER_NAME, line)) and bool(re.search('player', line)):
+        if bool(re.search("AqoursBaelz", line)) and bool(re.search('player', line)):
             if bool(re.search('p1', line)):
                 player="p1"
             elif bool(re.search('p2', line)):
@@ -82,46 +82,60 @@ def metric_calculator(f,filename):
         avg_hp = 0
     else:
         avg_hp = sum([tdic['HP'] for tdic in pokemons.values()])/len(pokemons)
+    remaining=0
+    for pokemon in pokemons:
+        if pokemons[pokemon]['HP']>0:
+            remaining+=1
+            # print()
+            # print(pokemon)
+            # print(pokemons[pokemon]['HP'])
 
     
-    return [turn_count,attack_count,switch_count,avg_hp*100,pokemons,filename]
+    return [turn_count,attack_count,switch_count,avg_hp*100,pokemons,filename,remaining]
 
 
-df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average HP','Pokemons','File'])
+df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average HP','Pokemons','File','Remaining Pokemon'])
 
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = 'battle_log_with_context\pokellmon_vs_invited_player'
+filepath = 'battle_log_opponent_context\pokellmon_vs_invited_player'
 
 for file in os.listdir(filepath):
 
     if file.endswith(".html") and re.search(PLAYER_NAME,file):
         filename=os.path.join(filepath, file)
-        print(filename)
+        # print(filename)
         f =open(filename)
         metric = metric_calculator(f,filename)
         df.loc[len(df.index)] = metric
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_with_context_nick.csv',index=None)
+# df.to_csv('battle_metrics_no_context_nick_player_side.csv',index=None)
 
+remaining_pokemon=0
 lost= 0
 avg_hp = 0
 for index, row in df.iterrows():
     if row['Average HP'] != 0:
         avg_hp += row['Average HP']
+        remaining_pokemon += row['Remaining Pokemon']
     else:
         lost+=1
 
-print(lost)
+# print(lost)
 win_rate = 1 - (lost /len(df))
 
 try:
     avg_hp = avg_hp/(len(df) - lost)
 except:
     avg_hp = 0
+
+try:
+    remaining_pokemon = remaining_pokemon/(len(df) - lost)
+except:
+    remaining_pokemon = 0
 
 print('-------Metrics--------')
 print('Battles Lost:\t\t',lost)
@@ -132,4 +146,6 @@ print('Average Turn Count: \t {:.2f}'.format(df['Turn Count'].mean()))
 print('Average Attack Count: \t {:.2f}'.format(df['Attack Count'].mean()))
 print('Average Switch Count: \t {:.2f}'.format(df['Switch Count'].mean()))
 print('Average HP: \t\t {:.2f}%'.format(avg_hp))
+print('Average Remaining Pokemon: \t\t {:.2f}'.format(remaining_pokemon))
+
 
