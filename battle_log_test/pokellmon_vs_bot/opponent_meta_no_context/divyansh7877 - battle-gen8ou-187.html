@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-187</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-187<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">divyansh7877</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">SimpleHeuristics 1</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-187|init|battle
+|title|SimpleHeuristics 1 vs. divyansh7877
+|j|☆SimpleHeuristics 1
+|j|☆divyansh7877
+|gametype|singles
+|player|p1|SimpleHeuristics 1|102|
+|player|p2|divyansh7877|1|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Urshifu-*, M|
+|poke|p1|Heatran, M|
+|poke|p1|Rotom-Wash|
+|poke|p1|Landorus-Therian, M|
+|poke|p1|Tapu Lele|
+|poke|p1|Kartana|
+|poke|p2|Toxapex, F|
+|poke|p2|Dragonite, M|
+|poke|p2|Ferrothorn, F|
+|poke|p2|Heatran, M|
+|poke|p2|Tapu Fini|
+|poke|p2|Zapdos|
+|teampreview
+|start
+|switch|p1a: Heatran|Heatran, M|100/100
+|switch|p2a: Heatran|Heatran, M|292/292
+|-item|p1a: Heatran|Air Balloon
+|-item|p2a: Heatran|Air Balloon
+|turn|1
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|2
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|3
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|4
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|5
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|6
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|7
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|8
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|9
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|10
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|11
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|12
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|13
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|upkeep
+|turn|14
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|15
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|16
+|move|p2a: Heatran|Earth Power|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Earth Power|p2a: Heatran
+|-immune|p2a: Heatran
+|upkeep
+|turn|17
+|switch|p2a: Tapu Fini|Tapu Fini|250/250
+|-fieldstart|move: Misty Terrain|[from] ability: Misty Surge|[of] p2a: Tapu Fini
+|move|p1a: Heatran|Magma Storm|p2a: Tapu Fini
+|-resisted|p2a: Tapu Fini
+|-damage|p2a: Tapu Fini|175/250
+|-activate|p2a: Tapu Fini|move: Magma Storm|[of] p1a: Heatran
+|-damage|p2a: Tapu Fini|144/250|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|18
+|move|p1a: Heatran|Magma Storm|p2a: Tapu Fini
+|-resisted|p2a: Tapu Fini
+|-damage|p2a: Tapu Fini|72/250
+|move|p2a: Tapu Fini|Hydro Pump|p1a: Heatran|[miss]
+|-miss|p2a: Tapu Fini|p1a: Heatran
+|-damage|p2a: Tapu Fini|41/250|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|19
+|move|p1a: Heatran|Magma Storm|p2a: Tapu Fini
+|-resisted|p2a: Tapu Fini
+|-damage|p2a: Tapu Fini|0 fnt
+|faint|p2a: Tapu Fini
+|upkeep
+|switch|p2a: Heatran|Heatran, M|292/292
+|-item|p2a: Heatran|Air Balloon
+|turn|20
+|switch|p2a: Toxapex|Toxapex, F|273/273
+|move|p1a: Heatran|Magma Storm|p2a: Toxapex
+|-resisted|p2a: Toxapex
+|-crit|p2a: Toxapex
+|-damage|p2a: Toxapex|174/273
+|-activate|p2a: Toxapex|move: Magma Storm|[of] p1a: Heatran
+|-heal|p2a: Toxapex|191/273|[from] item: Black Sludge
+|-damage|p2a: Toxapex|157/273|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|21
+|move|p1a: Heatran|Magma Storm|p2a: Toxapex|[miss]
+|-miss|p1a: Heatran|p2a: Toxapex
+|move|p2a: Toxapex|Scald|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|67/100
+|-enditem|p1a: Heatran|Air Balloon
+|-heal|p2a: Toxapex|174/273|[from] item: Black Sludge
+|-damage|p2a: Toxapex|140/273|[from] move: Magma Storm|[partiallytrapped]
+|-fieldend|Misty Terrain
+|upkeep
+|turn|22
+|move|p1a: Heatran|Magma Storm|p2a: Toxapex
+|-resisted|p2a: Toxapex
+|-damage|p2a: Toxapex|77/273
+|move|p2a: Toxapex|Scald|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|32/100
+|-heal|p2a: Toxapex|94/273|[from] item: Black Sludge
+|-damage|p2a: Toxapex|60/273|[from] move: Magma Storm|[partiallytrapped]
+|upkeep
+|turn|23
+|move|p1a: Heatran|Magma Storm|p2a: Toxapex
+|-resisted|p2a: Toxapex
+|-damage|p2a: Toxapex|0 fnt
+|faint|p2a: Toxapex
+|upkeep
+|switch|p2a: Heatran|Heatran, M|292/292
+|-item|p2a: Heatran|Air Balloon
+|turn|24
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-start|p1a: Heatran|ability: Flash Fire
+|move|p1a: Heatran|Magma Storm|p2a: Heatran
+|-start|p2a: Heatran|ability: Flash Fire
+|upkeep
+|turn|25
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|move|p1a: Heatran|Taunt|p2a: Heatran
+|-start|p2a: Heatran|move: Taunt
+|upkeep
+|turn|26
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|upkeep
+|turn|27
+|-end|p2a: Heatran|ability: Flash Fire|[silent]
+|switch|p2a: Zapdos|Zapdos|352/352
+|move|p1a: Heatran|Taunt|p2a: Zapdos
+|-start|p2a: Zapdos|move: Taunt
+|upkeep
+|turn|28
+|switch|p2a: Heatran|Heatran, M|292/292
+|-item|p2a: Heatran|Air Balloon
+|move|p1a: Heatran|Taunt|p2a: Heatran
+|-start|p2a: Heatran|move: Taunt
+|upkeep
+|turn|29
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|upkeep
+|turn|30
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|-end|p2a: Heatran|move: Taunt
+|upkeep
+|turn|31
+|move|p2a: Heatran|Stealth Rock|p1a: Heatran
+|-sidestart|p1: SimpleHeuristics 1|move: Stealth Rock
+|move|p1a: Heatran|Taunt|p2a: Heatran
+|-start|p2a: Heatran|move: Taunt
+|upkeep
+|turn|32
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|upkeep
+|turn|33
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|upkeep
+|turn|34
+|move|p2a: Heatran|Magma Storm|p1a: Heatran
+|-immune|p1a: Heatran|[from] ability: Flash Fire
+|move|p1a: Heatran|Taunt||[still]
+|-fail|p1a: Heatran
+|-end|p2a: Heatran|move: Taunt
+|upkeep
+|turn|35
+|move|p2a: Heatran|Taunt|p1a: Heatran
+|-start|p1a: Heatran|move: Taunt
+|cant|p1a: Heatran|move: Taunt|Taunt
+|upkeep
+|turn|36
+|-activate|p1a: Heatran|move: Struggle
+|move|p1a: Heatran|Struggle|p2a: Heatran
+|-crit|p2a: Heatran
+|-damage|p2a: Heatran|248/292
+|-enditem|p2a: Heatran|Air Balloon
+|-damage|p1a: Heatran|7/100|[from] recoil
+|move|p2a: Heatran|Taunt||[still]
+|-fail|p2a: Heatran
+|upkeep
+|turn|37
+|-activate|p1a: Heatran|move: Struggle
+|move|p1a: Heatran|Struggle|p2a: Heatran
+|-damage|p2a: Heatran|222/292
+|-damage|p1a: Heatran|0 fnt|[from] recoil
+|faint|p1a: Heatran
+|move|p2a: Heatran|Stealth Rock||[still]
+|-fail|p2a: Heatran
+|upkeep
+|switch|p1a: Landorus|Landorus-Therian, M|100/100
+|-damage|p1a: Landorus|88/100|[from] Stealth Rock
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Heatran|atk|1
+|turn|38
+|switch|p2a: Zapdos|Zapdos|352/352
+|move|p1a: Landorus|Defog|p2a: Zapdos
+|-unboost|p2a: Zapdos|evasion|1
+|-sideend|p1: SimpleHeuristics 1|Stealth Rock|[from] move: Defog|[of] p1a: Landorus
+|-heal|p1a: Landorus|94/100|[from] item: Leftovers
+|upkeep
+|turn|39
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|76/100
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|227/352
+|-enditem|p2a: Zapdos|Heavy-Duty Boots|[from] move: Knock Off|[of] p1a: Landorus
+|-heal|p1a: Landorus|82/100|[from] item: Leftovers
+|upkeep
+|turn|40
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|61/100
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|143/352
+|-heal|p1a: Landorus|67/100|[from] item: Leftovers
+|upkeep
+|turn|41
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|45/100
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|70/352
+|-status|p1a: Landorus|par|[from] ability: Static|[of] p2a: Zapdos
+|-heal|p1a: Landorus|51/100 par|[from] item: Leftovers
+|upkeep
+|turn|42
+|move|p2a: Zapdos|Roost|p2a: Zapdos
+|-heal|p2a: Zapdos|246/352
+|-singleturn|p2a: Zapdos|move: Roost
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|165/352
+|-heal|p1a: Landorus|57/100 par|[from] item: Leftovers
+|upkeep
+|turn|43
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|38/100 par
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|93/352
+|-heal|p1a: Landorus|44/100 par|[from] item: Leftovers
+|upkeep
+|turn|44
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|23/100 par
+|move|p1a: Landorus|Knock Off|p2a: Zapdos
+|-damage|p2a: Zapdos|16/352
+|-heal|p1a: Landorus|29/100 par|[from] item: Leftovers
+|upkeep
+|turn|45
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|9/100 par
+|cant|p1a: Landorus|par
+|-heal|p1a: Landorus|15/100 par|[from] item: Leftovers
+|upkeep
+|turn|46
+|move|p2a: Zapdos|Heat Wave|p1a: Landorus
+|-damage|p1a: Landorus|0 fnt
+|faint|p1a: Landorus
+|upkeep
+|switch|p1a: Rotom|Rotom-Wash, shiny|100/100
+|turn|47
+|switch|p2a: Heatran|Heatran, M|222/292
+|move|p1a: Rotom|Hydro Pump|p2a: Heatran
+|-supereffective|p2a: Heatran
+|-damage|p2a: Heatran|0 fnt
+|faint|p2a: Heatran
+|upkeep
+|switch|p2a: Ferrothorn|Ferrothorn, F|321/321
+|turn|48
+|move|p1a: Rotom|Hydro Pump|p2a: Ferrothorn
+|-resisted|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|271/321
+|move|p2a: Ferrothorn|Power Whip|p1a: Rotom
+|-supereffective|p1a: Rotom
+|-damage|p1a: Rotom|24/100
+|-heal|p1a: Rotom|30/100|[from] item: Leftovers
+|-heal|p2a: Ferrothorn|291/321|[from] item: Leftovers
+|upkeep
+|turn|49
+|move|p1a: Rotom|Hydro Pump|p2a: Ferrothorn
+|-resisted|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|240/321
+|move|p2a: Ferrothorn|Power Whip|p1a: Rotom
+|-supereffective|p1a: Rotom
+|-damage|p1a: Rotom|0 fnt
+|faint|p1a: Rotom
+|-heal|p2a: Ferrothorn|260/321|[from] item: Leftovers
+|upkeep
+|switch|p1a: Kartana|Kartana, shiny|100/100
+|turn|50
+|switch|p2a: Dragonite|Dragonite, M|386/386
+|move|p1a: Kartana|Swords Dance|p1a: Kartana
+|-boost|p1a: Kartana|atk|2
+|upkeep
+|turn|51
+|move|p1a: Kartana|Swords Dance|p1a: Kartana
+|-boost|p1a: Kartana|atk|2
+|move|p2a: Dragonite|Fire Punch|p1a: Kartana
+|-supereffective|p1a: Kartana
+|-damage|p1a: Kartana|0 fnt
+|faint|p1a: Kartana
+|upkeep
+|switch|p1a: Tapu Lele|Tapu Lele|100/100
+|-fieldstart|move: Psychic Terrain|[from] ability: Psychic Surge|[of] p1a: Tapu Lele
+|turn|52
+|move|p1a: Tapu Lele|Moonblast|p2a: Dragonite
+|-supereffective|p2a: Dragonite
+|-damage|p2a: Dragonite|227/386
+|-enditem|p2a: Dragonite|Weakness Policy
+|-boost|p2a: Dragonite|atk|2|[from] item: Weakness Policy
+|-boost|p2a: Dragonite|spa|2|[from] item: Weakness Policy
+|move|p2a: Dragonite|Fire Punch|p1a: Tapu Lele
+|-damage|p1a: Tapu Lele|12/100
+|upkeep
+|turn|53
+|move|p1a: Tapu Lele|Moonblast|p2a: Dragonite
+|-supereffective|p2a: Dragonite
+|-damage|p2a: Dragonite|0 fnt
+|faint|p2a: Dragonite
+|upkeep
+|switch|p2a: Ferrothorn|Ferrothorn, F|260/321
+|turn|54
+|move|p1a: Tapu Lele|Moonblast|p2a: Ferrothorn
+|-resisted|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|191/321
+|move|p2a: Ferrothorn|Power Whip|p1a: Tapu Lele
+|-damage|p1a: Tapu Lele|0 fnt
+|faint|p1a: Tapu Lele
+|-heal|p2a: Ferrothorn|211/321|[from] item: Leftovers
+|upkeep
+|switch|p1a: Urshifu|Urshifu-Rapid-Strike, M|100/100
+|turn|55
+|move|p1a: Urshifu|Close Combat|p2a: Ferrothorn
+|-supereffective|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|0 fnt
+|-unboost|p1a: Urshifu|def|1
+|-unboost|p1a: Urshifu|spd|1
+|-damage|p1a: Urshifu|88/100|[from] ability: Iron Barbs|[of] p2a: Ferrothorn
+|faint|p2a: Ferrothorn
+|upkeep
+|switch|p2a: Zapdos|Zapdos|16/352
+|turn|56
+|move|p1a: Urshifu|Close Combat|p2a: Zapdos
+|-resisted|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|-unboost|p1a: Urshifu|def|1
+|-unboost|p1a: Urshifu|spd|1
+|-status|p1a: Urshifu|par|[from] ability: Static|[of] p2a: Zapdos
+|faint|p2a: Zapdos
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
