@@ -92,7 +92,7 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = 'battle_log_with_context\pokellmon_vs_invited_player'
+filepath = 'battle_log_only_player_context\pokellmon_vs_invited_player'
 
 for file in os.listdir(filepath):
 
@@ -105,7 +105,7 @@ for file in os.listdir(filepath):
         f.close()
 
 # You may also change the csv name for particular test
-df.to_csv('battle_metrics_with_context_nick.csv',index=None)
+df.to_csv('battle_metrics_only_player_context_nick.csv',index=None)
 
 lost= 0
 avg_hp = 0

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-112</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-112<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">literally an ai</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">AqoursBaelz</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-112|init|battle
+|title|AqoursBaelz vs. literally an ai
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|j|☆AqoursBaelz
+|j|☆literally an ai
+|gametype|singles
+|player|p1|AqoursBaelz|1|1398
+|player|p2|literally an ai|101|1071
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rated|
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Pelipper, F|
+|poke|p1|Seismitoad, F|
+|poke|p1|Zapdos|
+|poke|p1|Ferrothorn, F|
+|poke|p1|Barraskewda, F|
+|poke|p1|Crawdaunt, F|
+|poke|p2|Togekiss, F|
+|poke|p2|Rotom-Wash|
+|poke|p2|Ferrothorn, M|
+|poke|p2|Magnezone|
+|poke|p2|Toxapex, M|
+|poke|p2|Conkeldurr, F|
+|teampreview
+|start
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|switch|p2a: Togekiss|Togekiss, F|343/343
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|turn|1
+|switch|p2a: Rotom|Rotom-Wash|210/210
+|move|p1a: Pelipper|U-turn|p2a: Rotom
+|-damage|p2a: Rotom|182/210
+|switch|p1a: Zapdos|Zapdos|100/100|[from] U-turn
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|2
+|move|p1a: Zapdos|Thunder|p2a: Rotom
+|-damage|p2a: Rotom|44/210
+|move|p2a: Rotom|Volt Switch|p1a: Zapdos
+|-damage|p1a: Zapdos|36/100
+|switch|p2a: Magnezone|Magnezone|250/250|[from] Volt Switch
+|-item|p2a: Magnezone|Air Balloon
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|3
+|move|p1a: Zapdos|Roost|p1a: Zapdos
+|-heal|p1a: Zapdos|86/100
+|-singleturn|p1a: Zapdos|move: Roost
+|move|p2a: Magnezone|Thunderbolt|p1a: Zapdos
+|-resisted|p1a: Zapdos
+|-damage|p1a: Zapdos|54/100
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|4
+|switch|p1a: Seismitoad|Seismitoad, F|100/100
+|move|p2a: Magnezone|Thunderbolt|p1a: Seismitoad
+|-immune|p1a: Seismitoad
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|5
+|switch|p2a: Ferrothorn|Ferrothorn, M|321/321
+|move|p1a: Seismitoad|Focus Blast|p2a: Ferrothorn
+|-supereffective|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|61/321
+|-damage|p1a: Seismitoad|91/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Ferrothorn|81/321|[from] item: Leftovers
+|upkeep
+|turn|6
+|switch|p1a: Zapdos|Zapdos|54/100
+|move|p2a: Ferrothorn|Power Whip|p1a: Zapdos|[miss]
+|-miss|p2a: Ferrothorn|p1a: Zapdos
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Ferrothorn|101/321|[from] item: Leftovers
+|upkeep
+|turn|7
+|move|p1a: Zapdos|Thunder|p2a: Ferrothorn
+|-resisted|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|24/321
+|move|p2a: Ferrothorn|Gyro Ball|p1a: Zapdos
+|-resisted|p1a: Zapdos
+|-damage|p1a: Zapdos|32/100
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Ferrothorn|44/321|[from] item: Leftovers
+|upkeep
+|turn|8
+|move|p1a: Zapdos|Hurricane|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|0 fnt
+|faint|p2a: Ferrothorn
+|-weather|none
+|upkeep
+|switch|p2a: Toxapex|Toxapex, M|273/273
+|turn|9
+|move|p1a: Zapdos|Roost|p1a: Zapdos
+|-heal|p1a: Zapdos|82/100
+|-singleturn|p1a: Zapdos|move: Roost
+|move|p2a: Toxapex|Scald|p1a: Zapdos
+|-damage|p1a: Zapdos|61/100
+|upkeep
+|turn|10
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|move|p2a: Toxapex|Recover||[still]
+|-fail|p2a: Toxapex|heal
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|11
+|switch|p2a: Rotom|Rotom-Wash|44/210
+|move|p1a: Pelipper|U-turn|p2a: Rotom
+|-damage|p2a: Rotom|13/210
+|switch|p1a: Zapdos|Zapdos|61/100|[from] U-turn
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|12
+|move|p1a: Zapdos|Thunder|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Magnezone|Magnezone|250/250
+|-item|p2a: Magnezone|Air Balloon
+|turn|13
+|switch|p1a: Seismitoad|Seismitoad, F|91/100
+|move|p2a: Magnezone|Thunderbolt|p1a: Seismitoad
+|-immune|p1a: Seismitoad
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|14
+|switch|p2a: Togekiss|Togekiss, F|343/343
+|move|p1a: Seismitoad|Weather Ball|p2a: Togekiss
+|-damage|p2a: Togekiss|108/343
+|-damage|p1a: Seismitoad|81/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Togekiss|129/343|[from] item: Leftovers
+|upkeep
+|turn|15
+|move|p1a: Seismitoad|Weather Ball|p2a: Togekiss
+|-damage|p2a: Togekiss|0 fnt
+|faint|p2a: Togekiss
+|-damage|p1a: Seismitoad|71/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Conkeldurr|Conkeldurr, F|414/414
+|turn|16
+|move|p1a: Seismitoad|Weather Ball|p2a: Conkeldurr
+|-damage|p2a: Conkeldurr|0 fnt
+|faint|p2a: Conkeldurr
+|-damage|p1a: Seismitoad|61/100|[from] item: Life Orb
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Toxapex|Toxapex, M|273/273
+|turn|17
+|move|p1a: Seismitoad|Earth Power|p2a: Toxapex
+|-supereffective|p2a: Toxapex
+|-damage|p2a: Toxapex|86/273
+|-damage|p1a: Seismitoad|51/100|[from] item: Life Orb
+|move|p2a: Toxapex|Toxic|p1a: Seismitoad
+|-status|p1a: Seismitoad|tox
+|-weather|none
+|-heal|p2a: Toxapex|103/273|[from] item: Black Sludge
+|-damage|p1a: Seismitoad|45/100 tox|[from] psn
+|upkeep
+|turn|18
+|move|p1a: Seismitoad|Earth Power|p2a: Toxapex
+|-supereffective|p2a: Toxapex
+|-damage|p2a: Toxapex|0 fnt
+|faint|p2a: Toxapex
+|-damage|p1a: Seismitoad|35/100 tox|[from] item: Life Orb
+|-damage|p1a: Seismitoad|23/100 tox|[from] psn
+|upkeep
+|switch|p2a: Magnezone|Magnezone|250/250
+|-item|p2a: Magnezone|Air Balloon
+|turn|19
+|move|p1a: Seismitoad|Focus Blast|p2a: Magnezone
+|-supereffective|p2a: Magnezone
+|-damage|p2a: Magnezone|0 fnt
+|-enditem|p2a: Magnezone|Air Balloon
+|faint|p2a: Magnezone
+|-damage|p1a: Seismitoad|13/100 tox|[from] item: Life Orb
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

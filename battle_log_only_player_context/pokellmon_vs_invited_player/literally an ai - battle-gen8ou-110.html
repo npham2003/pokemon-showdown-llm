@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen8ou-110</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen8ou-110<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">literally an ai</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">AqoursBaelz</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen8ou-110|init|battle
+|title|AqoursBaelz vs. literally an ai
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|uhtml|medal-msg|<div class="broadcast-blue">Curious what those medals under the avatar are? PS now has Ladder Seasons! For more information, check out the <a href="https://www.smogon.com/forums/threads/3740067/">thread on Smogon.</a></div>
+|j|☆AqoursBaelz
+|j|☆literally an ai
+|gametype|singles
+|player|p1|AqoursBaelz|1|1387
+|player|p2|literally an ai|101|1078
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|8
+|tier|[Gen 8] OU
+|rated|
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Dynamax Clause: You cannot dynamax
+|clearpoke
+|poke|p1|Pelipper, F|
+|poke|p1|Seismitoad, F|
+|poke|p1|Zapdos|
+|poke|p1|Ferrothorn, M|
+|poke|p1|Barraskewda, M|
+|poke|p1|Crawdaunt, F|
+|poke|p2|Togekiss, M|
+|poke|p2|Rotom-Wash|
+|poke|p2|Ferrothorn, F|
+|poke|p2|Magnezone|
+|poke|p2|Toxapex, F|
+|poke|p2|Conkeldurr, F|
+|teampreview
+|start
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|switch|p2a: Rotom|Rotom-Wash|210/210
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|turn|1
+|switch|p1a: Ferrothorn|Ferrothorn, M|100/100
+|move|p2a: Rotom|Thunderbolt|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-crit|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|62/100
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Ferrothorn|68/100|[from] item: Leftovers
+|upkeep
+|turn|2
+|switch|p2a: Togekiss|Togekiss, M|343/343
+|move|p1a: Ferrothorn|Leech Seed|p2a: Togekiss
+|-start|p2a: Togekiss|move: Leech Seed
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Ferrothorn|74/100|[from] item: Leftovers
+|-damage|p2a: Togekiss|301/343|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|86/100|[silent]
+|upkeep
+|turn|3
+|move|p2a: Togekiss|Flamethrower|p1a: Ferrothorn
+|-supereffective|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|41/100
+|move|p1a: Ferrothorn|Stealth Rock|p2a: Togekiss
+|-sidestart|p2: literally an ai|move: Stealth Rock
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Togekiss|322/343|[from] item: Leftovers
+|-heal|p1a: Ferrothorn|47/100|[from] item: Leftovers
+|-damage|p2a: Togekiss|280/343|[from] Leech Seed|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|59/100|[silent]
+|upkeep
+|turn|4
+|switch|p1a: Barraskewda|Barraskewda, M|100/100
+|move|p2a: Togekiss|Flamethrower|p1a: Barraskewda
+|-resisted|p1a: Barraskewda
+|-damage|p1a: Barraskewda|83/100
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Togekiss|301/343|[from] item: Leftovers
+|-damage|p2a: Togekiss|259/343|[from] Leech Seed|[of] p1a: Barraskewda
+|-heal|p1a: Barraskewda|99/100|[silent]
+|upkeep
+|turn|5
+|switch|p2a: Rotom|Rotom-Wash|210/210
+|-damage|p2a: Rotom|184/210|[from] Stealth Rock
+|move|p1a: Barraskewda|Liquidation|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|15/210
+|-unboost|p2a: Rotom|def|1
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|6
+|move|p1a: Barraskewda|Liquidation|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Magnezone|Magnezone|250/250
+|-damage|p2a: Magnezone|235/250|[from] Stealth Rock
+|-item|p2a: Magnezone|Air Balloon
+|turn|7
+|move|p1a: Barraskewda|Liquidation|p2a: Magnezone
+|-damage|p2a: Magnezone|0 fnt
+|-enditem|p2a: Magnezone|Air Balloon
+|faint|p2a: Magnezone
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Ferrothorn|Ferrothorn, F|321/321
+|-damage|p2a: Ferrothorn|301/321|[from] Stealth Rock
+|turn|8
+|switch|p1a: Pelipper|Pelipper, F|100/100
+|move|p2a: Ferrothorn|Power Whip|p1a: Pelipper
+|-damage|p1a: Pelipper|62/100
+|-weather|none
+|-heal|p2a: Ferrothorn|321/321|[from] item: Leftovers
+|upkeep
+|turn|9
+|switch|p1a: Ferrothorn|Ferrothorn, M|59/100
+|move|p2a: Ferrothorn|Gyro Ball|p1a: Ferrothorn
+|-resisted|p1a: Ferrothorn
+|-damage|p1a: Ferrothorn|58/100
+|-damage|p2a: Ferrothorn|281/321|[from] ability: Iron Barbs|[of] p1a: Ferrothorn
+|-heal|p2a: Ferrothorn|301/321|[from] item: Leftovers
+|-heal|p1a: Ferrothorn|64/100|[from] item: Leftovers
+|upkeep
+|turn|10
+|switch|p2a: Togekiss|Togekiss, M|259/343
+|-damage|p2a: Togekiss|174/343|[from] Stealth Rock
+|move|p1a: Ferrothorn|Knock Off|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|138/343
+|-enditem|p2a: Togekiss|Leftovers|[from] move: Knock Off|[of] p1a: Ferrothorn
+|-heal|p1a: Ferrothorn|70/100|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p1a: Pelipper|Pelipper, F|62/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|move|p2a: Togekiss|Flamethrower|p1a: Pelipper
+|-resisted|p1a: Pelipper
+|-damage|p1a: Pelipper|55/100
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|12
+|move|p2a: Togekiss|Air Slash|p1a: Pelipper
+|-damage|p1a: Pelipper|22/100
+|cant|p1a: Pelipper|flinch
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|13
+|switch|p1a: Zapdos|Zapdos|100/100
+|move|p2a: Togekiss|Air Slash|p1a: Zapdos
+|-resisted|p1a: Zapdos
+|-damage|p1a: Zapdos|78/100
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|14
+|move|p1a: Zapdos|Thunder|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|0 fnt
+|faint|p2a: Togekiss
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Ferrothorn|Ferrothorn, F|301/321
+|-damage|p2a: Ferrothorn|281/321|[from] Stealth Rock
+|turn|15
+|move|p1a: Zapdos|Hurricane|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|140/321
+|-start|p2a: Ferrothorn|confusion
+|-activate|p2a: Ferrothorn|confusion
+|-damage|p2a: Ferrothorn|119/321|[from] confusion
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Ferrothorn|139/321|[from] item: Leftovers
+|upkeep
+|turn|16
+|-activate|p2a: Ferrothorn|confusion
+|-damage|p2a: Ferrothorn|120/321|[from] confusion
+|move|p1a: Zapdos|Hurricane|p2a: Ferrothorn
+|-damage|p2a: Ferrothorn|0 fnt
+|faint|p2a: Ferrothorn
+|-weather|RainDance|[upkeep]
+|upkeep
+|switch|p2a: Toxapex|Toxapex, F|273/273
+|-damage|p2a: Toxapex|239/273|[from] Stealth Rock
+|turn|17
+|move|p1a: Zapdos|Thunder|p2a: Toxapex
+|-supereffective|p2a: Toxapex
+|-damage|p2a: Toxapex|5/273
+|move|p2a: Toxapex|Recover|p2a: Toxapex
+|-heal|p2a: Toxapex|142/273
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Toxapex|159/273|[from] item: Black Sludge
+|upkeep
+|turn|18
+|move|p1a: Zapdos|Thunder|p2a: Toxapex
+|-supereffective|p2a: Toxapex
+|-damage|p2a: Toxapex|0 fnt
+|faint|p2a: Toxapex
+|-weather|none
+|upkeep
+|switch|p2a: Conkeldurr|Conkeldurr, F|414/414
+|-damage|p2a: Conkeldurr|389/414|[from] Stealth Rock
+|turn|19
+|switch|p1a: Pelipper|Pelipper, F|22/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|move|p2a: Conkeldurr|Facade|p1a: Pelipper
+|-damage|p1a: Pelipper|0 fnt
+|faint|p1a: Pelipper
+|-weather|RainDance|[upkeep]
+|-status|p2a: Conkeldurr|brn|[from] item: Flame Orb
+|upkeep
+|switch|p1a: Zapdos|Zapdos|78/100
+|turn|20
+|move|p1a: Zapdos|Hurricane|p2a: Conkeldurr
+|-supereffective|p2a: Conkeldurr
+|-damage|p2a: Conkeldurr|0 fnt
+|faint|p2a: Conkeldurr
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

@@ -20,7 +20,7 @@ async def main():
     opponentMeta = opponent_meta.OpponentMeta(args.log_dir).get_opponent_meta('AqoursBaelz')
 
     os.makedirs(args.log_dir, exist_ok=True)
-    myteam = output_team(opponentMeta, True)
+    myteam = output_team(opponentMeta, False)
     # myteam = output_team(None, True)
     llm_player = LLMPlayer(battle_format="gen8ou",
                            api_key="sk-proj-p8puiPFqfjumNr8A6STpT3BlbkFJaaJAIeLGq9zqIGxxOst7",

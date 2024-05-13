@@ -99,7 +99,7 @@ df = pd.DataFrame(columns = ['Turn Count','Attack Count','Switch Count','Average
 
 # You can to check specific logs, you can create a list of file names and place here.file
 
-filepath = 'battle_log_opponent_context\pokellmon_vs_invited_player'
+filepath = 'battle_log_only_player_context\pokellmon_vs_invited_player'
 
 for file in os.listdir(filepath):
 
