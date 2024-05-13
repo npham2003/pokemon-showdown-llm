@@ -2,7 +2,7 @@ import re
 import os
 import pandas as pd
 
-PLAYER_NAME = 'literally an ai'
+PLAYER_NAME = 'divyansh7877'
 
 def metric_calculator(f,filename):
     '''
